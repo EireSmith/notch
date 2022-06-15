@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ first_name }}'s notches</title>
+</head>
+<body>
+
+  <div class="dotstyle dotstyle-dotmove">
+    <ul>
+      <li class="current"><a href="#">notch</a></li>
+      <li><a href="#">job search</a></li>
+      <li><!-- dummy dot --></li>
+    </ul>
+  </div>
+
+  <div id="wrapper">
+    <div class="container home">
+      <h1>{{ first_name|lower|trim }}'s notches</h1>
+      <div class="inputField">
+        <input style="font-size: 15px" id="job" type="text" placeholder="title">
+        <input style="font-size: 15px" id="start" type="date" placeholder="start">
+        <input style="font-size: 15px" id="end" type="date" placeholder="end">
+        <input style="font-size: 15px" id="pay" type="number" min="1" step="any" placeholder="pay">
+        <button><i class="fas fa-plus"></i></button>
+      </div>
+      <div class =tabDiv>
+        <table id='tab1' >
+          <tbody id="tableBody">   
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="container_job_search">
+      
+      <div id="job_search">
+        <div class="inputField">
+          <input style="font-size: 15px" id="keyword" type="text" placeholder="keywords">
+          <input style="font-size: 15px" id="location" type="text" placeholder="location">
+          <button><i class="fas fa-plus"></i></button>
+        </div>
+      </div> 
+      <div class =tabDiv_job_search>
+        <table id='tab1_job_search' >
+          <tbody id="tableBody_job_search"> 
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class ='footer'>
+        <button class="showbtn" onClick="show()"><i class="fa fa-chevron-down"></i></button>
+        <button class="clearbtn" onClick="removeTable()" ><i class="fa fa-chevron-up"></i></button>   
+    </div>
+  </div> 
+
+
+</body>
+
+<!--<script  src="js/script.js"></script>-->
+<link rel="stylesheet" href="css/style.css">
+
+</html>

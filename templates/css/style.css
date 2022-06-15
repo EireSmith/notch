@@ -1,0 +1,317 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+@font-face {
+	font-weight: normal;
+	font-style: normal;
+	font-family: 'codropsicons';
+	src:url('../fonts/codropsicons/codropsicons.eot');
+	src:url('../fonts/codropsicons/codropsicons.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/codropsicons/codropsicons.woff') format('woff'),
+		url('../fonts/codropsicons/codropsicons.ttf') format('truetype'),
+		url('../fonts/codropsicons/codropsicons.svg#codropsicons') format('svg');
+}
+
+
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+::selection{
+  color: #ffff;
+  background: rgb(142, 73, 232);
+}
+body{
+  width: 100%;
+  height: 100vh;
+  /* overflow: hidden; */
+  padding: 10px;
+  background: #ccffcc;
+
+}
+
+.dotstyle ul {
+	position: relative;
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	cursor: default;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+  background-color: red;
+}
+
+.dotstyle li {
+	position: relative;
+  float: left; 
+	margin: 0 16px;
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+}
+
+.dotstyle li a {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	outline: none;
+	border-radius: 50%;
+	background-color: #fff;
+	background-color: rgba(255, 255, 255, 0.3);
+	text-indent: -999em; /* make the text accessible to screen readers */
+	cursor: pointer;
+	position: absolute;
+
+}
+
+.dotstyle li a:focus {
+	outline: none;
+}
+
+.dotstyle-dotmove li:last-child {
+	position: absolute;
+	left: 0;
+	margin: 0;
+	width: 48px;
+
+
+	transition: transform 0.3s ease;
+}
+
+.dotstyle-dotmove li:last-child::after {
+	content: "";
+	position: relative;
+	left: 50%;
+	top: 2px;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	background: #c44d48;
+  display: inline-block;
+
+	transform: translateX(-50%);
+}
+
+.dotstyle-dotmove li.current:first-child ~ li:last-child {
+
+	transform: translateX(0%);
+}
+.dotstyle-dotmove li.current:nth-child(2) ~ li:last-child {
+	transform: translateX(200%);
+}
+
+.dotstyle-dotmove li a:hover,
+.dotstyle-dotmove li a:focus {
+	background-color: #fff;
+}
+
+
+
+#wrapper{
+  background: #99ccff;
+  max-width: 80%;
+  width: 100%;
+  margin: 120px auto;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
+}
+
+#wrapper .inputField{
+  margin: 10px 0;
+  width: 100%;
+  display: flex;
+  height: 45px;
+}
+.inputField input{
+  height: 100%;
+  outline: none;
+  border-radius: 20px;
+  border: 5px solid #99ccff;
+  font-size: 17px;
+  padding-left: 5px;
+  transition: all .5s ease;
+}
+
+.inputField .job{
+  width: 100%;
+}
+
+.inputField .start{
+  width: 50%;
+}
+
+.inputField .end{
+  width: 50%;
+}
+
+.inputField .pay{
+  width: 35%;
+}
+
+
+.inputField input:focus{
+  border-color: #ccffcc;
+}
+.inputField button{
+  width: 50px;
+  height: 100%;
+  border: none;
+  color: #fff;
+  margin-left: 5px;
+  font-size: 21px;
+  outline: none;
+  background: #8E49E8;
+  cursor: pointer;
+  border-radius: 3px;
+  opacity: 0.6;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+.inputField button:hover,
+.footer button:hover{
+  background: #721ce3;
+}
+.inputField button.active{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.list{
+  margin: 10px 0;
+  width: 100%;
+  display: inline;
+}
+ul{
+  margin-right: 10px;
+ 
+}
+
+.jobList li{
+  list-style: none;
+  height: 45px;
+  line-height: 45px;
+  margin-bottom: 8px;
+  background: #f2f2f2;
+  border-radius: 20px;
+  padding: 0 15px;
+  cursor: default;
+  overflow: hidden;
+}
+
+
+.jobList li .icon{
+  position: inherit;
+  right:-45px;
+  background: #e74c3c;
+  width: 45px;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 3px 3px 0;
+  cursor: pointer;
+  transition: all .5s ease;
+}
+.jobList li:hover .icon{
+  right: 0px;
+}
+
+.jobList{
+  width: 37%;
+  float: left;
+  display: inline-block;
+  
+}
+
+.startList{
+  width: 20%;
+  float: left;
+  display: inline-block;
+}
+.endList{
+  width: 20%;
+  float: left;
+  display: inline-block;
+}
+.payList{
+  width: 15%;
+  float: left;
+  display: inline-block;
+}
+
+.startList li{
+ 
+  width: 100%;
+  list-style: none;
+  height: 45px;
+  line-height: 45px;
+  margin-bottom: 8px;
+  background: #f2f2f2;
+  border-radius: 20px;
+  padding: 0 15px;
+  cursor: default;
+  overflow: hidden;
+}
+
+.endList li{
+  width: 100%;
+  list-style: none;
+  height: 45px;
+  line-height: 45px;
+  margin-bottom: 8px;
+  background: #f2f2f2;
+  border-radius: 20px;
+  padding: 0 15px;
+  cursor: default;
+  overflow: hidden;
+}
+
+
+.payList li{
+  width: 100%;
+  list-style: none;
+  height: 45px;
+  line-height: 45px;
+  margin-bottom: 8px;
+  background: #f2f2f2;
+  border-radius: 20px;
+  padding: 0 15px;
+  cursor: default;
+  overflow: hidden;
+}
+
+
+
+.wrapper .footer{
+  display: flex;
+  width: 100%;
+  margin-top: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer button{
+  padding: 6px 10px;
+  border-radius: 3px;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-weight: 400;
+  font-size: 16px;
+  margin-left: 5px;
+  background: #8E49E8;
+  cursor: pointer;
+  user-select: none;
+  opacity: 0.6;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+.footer button.active{
+  opacity: 1;
+  pointer-events: auto;
