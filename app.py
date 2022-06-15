@@ -4,12 +4,9 @@ import json
 
 #run this doc in virtenv 'source virt/scripts/activate
 #to update changes without restarting flask type 'export FLASK_ENV=development', 'export FLASK_APP=app.py'
+#make sure to use virtenv interpereter
 
 
-
-jinja_environment = jinja2.Environment(
-  loader=jinja2.FileSystemLoader(['templates', 'templates\error_pages'])
-)
 
 app = Flask(__name__)
 
@@ -27,13 +24,13 @@ def index():
 #invalid URL
 @app.errorhandler(404)
 def page_not_found(e):
-  return render_template("404.html"), 404
+  return render_template("error_pages/404.html"), 404
 
 
 
 @app.errorhandler(500)
 def page_not_found(e):
-  return render_template("500.html"), 500
+  return render_template("error_pages/500.html"), 500
 
 
 
