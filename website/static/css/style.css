@@ -23,122 +23,174 @@
   color: #ffff;
   background: rgb(142, 73, 232);
 }
+
 body{
   width: 100%;
   height: 100vh;
-  /* overflow: hidden; */
-  padding: 10px;
+  overflow: hidden;
   background: #ccffcc;
 
 }
 
-.dotstyle ul {
-	position: relative;
-	display: inline-block;
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	cursor: default;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-  background-color: red;
-}
-
-.dotstyle li {
-	position: relative;
-  float: left; 
-	margin: 0 16px;
-	width: 16px;
-	height: 16px;
-	cursor: pointer;
-}
-
-.dotstyle li a {
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	outline: none;
-	border-radius: 50%;
-	background-color: #fff;
-	background-color: rgba(255, 255, 255, 0.3);
-	text-indent: -999em; /* make the text accessible to screen readers */
-	cursor: pointer;
-	position: absolute;
-
-}
-
-.dotstyle li a:focus {
-	outline: none;
-}
-
-.dotstyle-dotmove li:last-child {
-	position: absolute;
-	left: 0;
-	margin: 0;
-	width: 48px;
-
-
-	transition: transform 0.3s ease;
-}
-
-.dotstyle-dotmove li:last-child::after {
-	content: "";
-	position: relative;
-	left: 50%;
-	top: 2px;
-	width: 16px;
-	height: 16px;
-	border-radius: 50%;
-	background: #c44d48;
-  display: inline-block;
-
-	transform: translateX(-50%);
-}
-
-.dotstyle-dotmove li.current:first-child ~ li:last-child {
-
-	transform: translateX(0%);
-}
-.dotstyle-dotmove li.current:nth-child(2) ~ li:last-child {
-	transform: translateX(200%);
-}
-
-.dotstyle-dotmove li a:hover,
-.dotstyle-dotmove li a:focus {
-	background-color: #fff;
-}
-
-
-
 #wrapper{
-  background: #99ccff;
-  max-width: 80%;
   width: 100%;
-  margin: 120px auto;
-  padding: 25px;
+  height: 100%;
+  padding: 5%;
+  background-color: rgb(207, 243, 152);
+}
+
+
+/* Style the navigation menu */
+.topnav {
+  position: relative;
+  float: left;
+  margin: auto;
+  text-align: center;
+  width: 60px;
+}
+
+/* Hide the links inside the navigation menu (except for logo/home) */
+.topnav #myLinks {
+  display: none;
+}
+
+/* Style navigation menu links */
+.topnav a {
+  transition: all 0.1s linear;
+  color: white;
+  padding: 14px 16px;
+  border: 5px solid #99ccff;
+  border-radius: 50px;
+  text-decoration: none;
+  background-color:red;
+  font-size: 17px;
+  display: block;
+}
+
+/* Style the hamburger menu */
+.topnav a.icon {
+  border-radius: 50px;
+  margin: auto;
+  background: black;
+  position: relative;
+}
+
+.topnav:hover #myLinks {display: block;}
+/* Add a grey background color on mouse-over */
+.topnav a:hover {
+  color: black;
+}
+
+/* Style the active link (or home/logo) */
+.active {
+  color: white;
+}
+
+
+.main{
+  margin:auto;
+  margin-top: 10%;
+  width: 1000px; 
+}
+
+
+.internal_nav{
+  height: 40px;
+  width: 30%;
+  margin: auto;
+  margin-top: 150px;
+  position: fixed;
+
+}
+.dot_list {
+  /* Center the content */
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  /* Reset styles */
+  list-style-type: none;
+  margin: auto;
+
+}
+
+
+.dot_list li a {
+  border-radius: 9999px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  margin-left: 10px;
+  opacity: 50%;
+  background-color: #8064A2 !important;
+}
+
+.dot_list li a:hover{
+  transition: opacity .2s ease-in-out;
+  opacity: 100%;
+  
+}
+
+#main_container{
+
+  background: #99ccff;
+  margin: auto;
+  margin-top: 0px;
+  width: 100%;  
+  padding: 2%;
   border-radius: 20px;
   box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
+  overflow: hidden;
+
 }
 
-#wrapper .inputField{
+#main_container .inputField{
+
   margin: 10px 0;
   width: 100%;
   display: flex;
   height: 45px;
 }
+
+.avrg{
+  background-color: #721ce3;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  padding: auto;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.day_avrg , .pay_avrg{
+  background-color: red;
+  width: 150px;
+  height: 15%;
+  padding: 20%;
+  text-align: center;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
+} 
+.day_avrg{
+float: left;
+
+}
+
+.pay_avrg{
+  float: right;
+}
+
+
 .inputField input{
   height: 100%;
   outline: none;
   border-radius: 20px;
-  border: 5px solid #99ccff;
+  border: 1px solid #99ccff;
   font-size: 17px;
-  padding-left: 5px;
   transition: all .5s ease;
+  text-align: center;
+  margin-left: 5px;
 }
 
 .inputField .job{
@@ -161,6 +213,7 @@ body{
 .inputField input:focus{
   border-color: #ccffcc;
 }
+
 .inputField button{
   width: 50px;
   height: 100%;
@@ -173,7 +226,6 @@ body{
   cursor: pointer;
   border-radius: 3px;
   opacity: 0.6;
-  pointer-events: none;
   transition: all 0.3s ease;
 }
 .inputField button:hover,
@@ -225,24 +277,24 @@ ul{
 
 .jobList{
   width: 37%;
-  float: left;
+  float: none;
   display: inline-block;
   
 }
 
 .startList{
   width: 20%;
-  float: left;
+  float: none;
   display: inline-block;
 }
 .endList{
   width: 20%;
-  float: left;
+  float: none;
   display: inline-block;
 }
 .payList{
   width: 15%;
-  float: left;
+  float: none;
   display: inline-block;
 }
 
@@ -307,11 +359,12 @@ ul{
   margin-left: 5px;
   background: #8E49E8;
   cursor: pointer;
-  user-select: none;
   opacity: 0.6;
-  pointer-events: none;
   transition: all 0.3s ease;
 }
 .footer button.active{
   opacity: 1;
   pointer-events: auto;
+}
+
+/*JOB SEARCH EXCLUSIVES*/

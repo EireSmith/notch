@@ -1,0 +1,55 @@
+ {% extends "base.html" %}
+ {% block title %}{{ first_name|lower|trim }}'s notches{% endblock %}
+ {% block home_nav %}
+ <div class="nav">
+    <ul class="dot_list">
+        <li ><a id="notch" class="btn btn-info" href="/"></a></li>
+        <li><a id="job_search" class="btn btn-info" href="/invoices"></a></li>
+    </ul>
+</div> 
+ {% endblock %}
+ {% block content %}
+    <div id="home">
+        <form class="inputField" method="POST"> 
+            <input style="font-size: 15px" name ="job" id="job" type="text" placeholder="title">
+            <input style="font-size: 15px"  name ="start"id="start" type="date" placeholder="start">
+            <input style="font-size: 15px" name ="end" id="end" type="date"  placeholder="end">
+            <input style="font-size: 15px" name ="pay" id="pay" type="number" min="0" step="any" placeholder="pay">
+            <button ><i type="submit" class="fa fa-plus"></i></button>
+        </form>
+        <div class =tab_div>
+            <table id='table' >
+                <tbody id="table_body">
+                    {% for contract in user.contracts %}
+                    <tr id="tab_row">
+                        <td>{{contract.job_title}}</td>
+                        <td >{{contract.date_start}}</td>
+                        <td>{{contract.date_end}}</td>
+                        <td>{{contract.pay_rate}}</td>
+                        <td id="del_button"><button class="delete_btn" onClick="deleteContract({{contract.id}})"><i class="fa fa-ban"></i></button></td>
+                        <td id="update_btn"><button class="update_btn" onClick="updateContract({{contract.id}})"><i class="fa fa-ban"></i></button></td>
+                    </tr>
+                    
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class ='footer'>
+        <button class="showbtn" onClick="showContracts()"><i class="fa fa-chevron-down"></i></button>
+        <button class="clearbtn" onClick="hideContracts()" ><i class="fa fa-chevron-up"></i></button>   
+    </div>
+{% endblock %}
+
+{% block avrg %}
+<div class="avrg">
+    <div class="day_avrg">
+        <h2>{{ average_days }}</h2>
+    
+    </div>
+    <div class="pay_avrg">
+        <h2>£234 rate</h2>
+    </div>
+</div>
+
+{% endblock %}
