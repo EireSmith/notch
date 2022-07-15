@@ -10,8 +10,8 @@ def average_days(start, end):
     dates['diff'] = dates['end'].dt.date - dates['start'].dt.date
     diff = dates['diff']
 
-    #calculate sum of dates
-    sum=0
+    #calculate sum of amount of dates
+    sum = 0
     for d in diff:
         d = d.days
         d = int(d)
@@ -21,3 +21,11 @@ def average_days(start, end):
     average_days = int(sum / len(diff))
 
     return average_days
+
+def average_pay(rates):
+    
+    sum_rates = sum(rates)
+    average_pay = (sum_rates / len(rates))
+    print(average_pay)
+    return average_pay
+    

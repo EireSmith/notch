@@ -2,7 +2,7 @@ from website import create_app
 #use virtenv interpereter
 #run this doc in virtenv 'source virt/scripts/activate
 #export FLASK_ENV=development 
-#export FLASK_APP=app.py
+#c
 
 app = create_app()
 

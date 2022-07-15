@@ -5,7 +5,7 @@ from flask_login import login_required, current_user
 from . import db
 import datetime
 import json
-from .averages import average_days
+from .averages import average_days, average_pay
 
 views = Blueprint('views', __name__)
 
@@ -17,11 +17,11 @@ def index():
   start_dates_list=[]
   end_dates_list=[]
 
-  #get dates from current user
+  #get data from current user
   curr_user = current_user.id
   contract_query = Contract.query.filter(Contract.user_id == curr_user).all()
-
-  #populate date lists
+  
+  #populate date lists with string values
   for s in contract_query:
     s = str(s.date_start)
     start_dates_list.append(s)
@@ -31,7 +31,14 @@ def index():
   
   int_average_days = average_days(start_dates_list, end_dates_list)
 
+  rates = []
+  for r in contract_query:
+    r = int(r.pay_rate)
+    rates.append(r)
 
+  int_average_pay = average_pay(rates)
+
+  
   if request.method == 'POST':
         date_format = '%Y-%m-%d'
         job = request.form.get('job')
@@ -57,7 +64,7 @@ def index():
   first_name= current_user.first_name
   first_name_init =list(first_name)[0]
   family_name_init = list(current_user.family_name)[0]
-  return render_template("index.html", user = current_user, first_name = first_name, first_name_init = first_name_init, family_name_init = family_name_init, average_days = int_average_days)
+  return render_template("index.html", user = current_user, first_name = first_name, first_name_init = first_name_init, family_name_init = family_name_init, average_days = int_average_days, average_pay = int_average_pay)
 
 @views.route('/delete_notch', methods=["POST"])
 @login_required
