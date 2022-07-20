@@ -1,14 +1,7 @@
 {% extends "base.html" %}
 {% block title %}{{ first_name|lower|trim }}'s invoices{% endblock %}
-{% block home_nav %}
-<div class="nav">
-   <ul class="dot_list">
-       <li ><a id="notch" class="btn btn-info" href="/"></a></li>
-       <li><a id="job_search" class="btn btn-info" href="/search"></a></li>
-   </ul>
-</div> 
-{% endblock %}
 {% block content %}
+
                 <div id="job_search">
                     <div class="inputField">
                         <input style="font-size: 15px" id="keyword" type="text" placeholder="keywords">
@@ -16,10 +9,12 @@
                         <button><i class="fas fa-plus"></i></button>
                     </div>
                 </div> 
-                <div class =tabDiv_job_search>
-                    <table id='tab1_job_search' >
-                        <tbody id="tableBody_job_search"> 
-                        </tbody>
-                    </table>
-                </div>
+                {% for invoice in contract.invoices %}
+                <tr id="tab_row">
+                    <td>{{invoice.invoice_data}}</td>
+
+                </tr>
+                
+                {% endfor %}
+
 {% endblock %}

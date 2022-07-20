@@ -1,8 +1,8 @@
 from website import create_app
-#use virtenv interpereter
+#use virtenv interpereterr
 #run this doc in virtenv 'source virt/scripts/activate
 #export FLASK_ENV=development 
-#c
+#export FLASK_APP=app.py
 
 app = create_app()
 

@@ -25,6 +25,7 @@ startInput.addEventListener("input", buttonActive)
 payInput.addEventListener("input", buttonActive)
 */
 
+
 //set end date after start date
 document.getElementById("start").addEventListener("change", function() {
     var start = this.value;
@@ -42,7 +43,7 @@ function hideContracts() { document.getElementById("table").style="display:none;
 
 //delete contract
 function deleteContract(contract_id) {
-    fetch("/delete_notch", {method: "POST", body: JSON.stringify({ contract_id: contract_id}),
+    fetch("/delete_notch", {method: "POST", body: JSON.stringify({ contract_id: contract_id})
 }).then((_res)=> {window.location.href = "/"})
 };
 
@@ -56,4 +57,5 @@ function updateContract(contract_id) {
     end: endInput, pay: payInput})
 }).then((_res)=> {window.location.href = "/"})
 };
+
 

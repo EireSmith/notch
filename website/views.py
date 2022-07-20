@@ -1,6 +1,7 @@
 
-from flask import render_template, request, flash, jsonify, Blueprint
-from .models import Contract
+from io import BytesIO
+from flask import render_template, request, flash, jsonify, Blueprint, send_file
+from .models import Contract, Invoice
 from flask_login import login_required, current_user
 from . import db
 import datetime
@@ -8,7 +9,7 @@ import json
 from .averages import average_days, average_pay
 
 views = Blueprint('views', __name__)
-
+ 
 
 @views.route('/', methods=['GET', 'POST'])
 @login_required
@@ -29,6 +30,7 @@ def index():
     e = str(e.date_end)
     end_dates_list.append(e)
   
+
   int_average_days = average_days(start_dates_list, end_dates_list)
 
   rates = []
@@ -66,6 +68,9 @@ def index():
   family_name_init = list(current_user.family_name)[0]
   return render_template("index.html", user = current_user, first_name = first_name, first_name_init = first_name_init, family_name_init = family_name_init, average_days = int_average_days, average_pay = int_average_pay)
 
+
+
+
 @views.route('/delete_notch', methods=["POST"])
 @login_required
 def delete_contract():
@@ -78,6 +83,9 @@ def delete_contract():
       db.session.commit()
   return jsonify({}) #empty json dict
 
+
+
+
 @views.route('/update_notch', methods=['POST'])
 @login_required
 def update_contract():
@@ -89,45 +97,88 @@ def update_contract():
       start = json_file["start"]
       end = json_file["end"]
       pay = json_file["pay"]
-
-      if job == "":
-        contract.job_title = contract.job_title
-      else:
-        contract.job_title = job
       
-      if start == "":
-         contract.date_start =  contract.date_start
-         
-      else:
-        start = datetime.datetime.strptime(start,  date_format)
-        contract.date_start = start
-        
-      if end == "":
-         contract.date_end = contract.date_end
-         
-      else:
-        end = datetime.datetime.strptime(end,  date_format)
-        contract.date_end = end
+      if contract:
+        if contract.user_id == current_user.id:
+          if job == "":
+            contract.job_title = contract.job_title
+          else:
+            contract.job_title = job
+          
+          if start == "":
+            contract.date_start =  contract.date_start
+            
+          else:
+            start = datetime.datetime.strptime(start,  date_format)
+            contract.date_start = start
+            
+          if end == "":
+            contract.date_end = contract.date_end
+            
+          else:
+            end = datetime.datetime.strptime(end,  date_format)
+            contract.date_end = end
 
-      if pay == "":
-        contract.pay_rate = contract.pay_rate
+          if pay == "":
+            contract.pay_rate = contract.pay_rate
+          else:
+            contract.pay_rate = pay
+
+          db.session.commit()
+          flash('notch has been Updated', category="success")
+          return jsonify({}) #empty json dict
+
+
+@views.route('/upload', methods=['GET', 'POST'])
+@login_required
+def upload_invoice():
+  if request.method == 'POST':
+     # takes in contract_id  from URL
+      contract_id = request.args.get('id')
+      is_upload = Invoice.query.filter_by(contract_id = contract_id).first()
+
+      if is_upload:
+        flash('invoice already attached', category="error")
+        return render_template("upload.html", user = current_user)
+      
       else:
-        contract.pay_rate = pay
+        #  takes file from submit form
+        file = request.files["file"]
+        # adds invoice to database
+        invoice = Invoice(filename=file.filename, invoice_data = file.read(), contract_id = contract_id)
+        db.session.add(invoice)
+        db.session.commit()
+        return render_template("index.html")
+  return render_template("upload.html", user = current_user)
 
-      db.session.commit()
-      flash('notch has been Updated', category="success")
-      return jsonify({}) #empty json dict
 
+
+@views.route('/download/<int:id>', methods=['GET'])
+@login_required
+def download_invoice(id):
+  curr_user = current_user.id
+  if curr_user:
+    invoice = Invoice.query.filter_by(contract_id = id).first()
+    if invoice:
+      return send_file(BytesIO(invoice.invoice_data), attachment_filename=invoice.filename, as_attachment=True)
+    else: 
+      flash('no invoice attatched', category="error")
+      return index()
 
 @views.route('/invoices')
 @login_required
 def search():
+
   first_name= current_user.first_name
   first_name_init =list(current_user.first_name)[0]
   family_name_init = list(current_user.family_name)[0]
+  
+  curr_user = current_user.id
+  contract_query = Contract.query.filter(Contract.user_id == curr_user).all()
 
+  invoice_query = Invoice.query.filter(Invoice.contract_id == contract_query.contract_id).all()
 
-  return render_template("invoices.html", user = current_user, first_name = first_name, first_name_init = first_name_init, family_name_init = family_name_init )
+  return render_template("invoices.html", invoice_query=invoice_query, user = current_user, first_name = first_name, first_name_init = first_name_init, family_name_init = family_name_init)
 
 
 #error pages
