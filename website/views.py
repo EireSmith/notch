@@ -1,6 +1,6 @@
 
 from io import BytesIO
-from flask import render_template, request, flash, jsonify, Blueprint, send_file
+from flask import render_template, request, flash, jsonify, Blueprint, send_file, redirect, url_for
 from .models import Contract, Invoice
 from flask_login import login_required, current_user
 from . import db
@@ -26,11 +26,11 @@ def index():
   for s in contract_query:
     s = str(s.date_start)
     start_dates_list.append(s)
+
   for e in contract_query:
     e = str(e.date_end)
     end_dates_list.append(e)
   
-
   int_average_days = average_days(start_dates_list, end_dates_list)
 
   rates = []
@@ -44,18 +44,19 @@ def index():
   if request.method == 'POST':
         date_format = '%Y-%m-%d'
         job = request.form.get('job')
+        start = request.form.get('start')
+        end = request.form.get('end')
+        pay = request.form.get('pay')
+
         if job == None:
           job = ""
-        start = request.form.get('start')
-        if start == "":
+        if start == "" or start == None:
           start = str(datetime.date.today())
         start= datetime.datetime.strptime(start, date_format) #parsing HTML data type of string to date object
-        end = request.form.get('end')
-        if end == "":
+        if end == "" or end == None:
           end =str(datetime.date.today())
         end= datetime.datetime.strptime(end, date_format)
-        pay = request.form.get('pay')
-        if pay == None:
+        if pay == None or pay == "":
           pay = 0
 
         new_contract = Contract(job_title=job, date_start=start, date_end=end, pay_rate=pay, user_id=current_user.id)
@@ -135,12 +136,15 @@ def upload_invoice():
   if request.method == 'POST':
      # takes in contract_id  from URL
       contract_id = request.args.get('id')
-      is_upload = Invoice.query.filter_by(contract_id = contract_id).first()
+      user_contracts = Contract.query.with_entities(Contract.id).filter(Contract.user_id == current_user.id).all()
+      permission = False
+      for u in user_contracts:
+        if int(contract_id) in u:
+          permission = True
 
-      if is_upload:
+      exists = Invoice.query.filter(Invoice.contract_id == contract_id).first() #checking if invoice exists
+      if exists or permission == False:
         flash('invoice already attached', category="error")
-        return render_template("upload.html", user = current_user)
-      
       else:
         #  takes file from submit form
         file = request.files["file"]
@@ -148,7 +152,7 @@ def upload_invoice():
         invoice = Invoice(filename=file.filename, invoice_data = file.read(), contract_id = contract_id)
         db.session.add(invoice)
         db.session.commit()
-        return render_template("index.html")
+        return redirect(url_for("views.index"))
   return render_template("upload.html", user = current_user)
 
 
@@ -156,30 +160,26 @@ def upload_invoice():
 @views.route('/download/<int:id>', methods=['GET'])
 @login_required
 def download_invoice(id):
-  curr_user = current_user.id
-  if curr_user:
-    invoice = Invoice.query.filter_by(contract_id = id).first()
-    if invoice:
-      return send_file(BytesIO(invoice.invoice_data), attachment_filename=invoice.filename, as_attachment=True)
-    else: 
-      flash('no invoice attatched', category="error")
-      return index()
+  
+  user_contracts = Contract.query.with_entities(Contract.id).filter(Contract.user_id == current_user.id).all()
+  for u in user_contracts:
+    if id in u:
+      invoice = Invoice.query.filter_by(contract_id = id).first()
+      if invoice:
+        return send_file(BytesIO(invoice.invoice_data), attachment_filename=invoice.filename, as_attachment=True)
 
-@views.route('/invoices')
+  flash('no invoice attatched', category="error")
+  return redirect(url_for("views.index"))
+
+@views.route('/invoices', methods =["GET"])
 @login_required
 def search():
 
   first_name= current_user.first_name
   first_name_init =list(current_user.first_name)[0]
   family_name_init = list(current_user.family_name)[0]
-  
-  curr_user = current_user.id
-  contract_query = Contract.query.filter(Contract.user_id == curr_user).all()
-
-  invoice_query = Invoice.query.filter(Invoice.contract_id == contract_query.contract_id).all()
-
-  return render_template("invoices.html", invoice_query=invoice_query, user = current_user, first_name = first_name, first_name_init = first_name_init, family_name_init = family_name_init)
-
+  invoice_ids = Invoice.get_user_invoice(current_user.id)
+  return render_template("invoices.html", invoices = invoice_ids, user = current_user, first_name = first_name, first_name_init = first_name_init, family_name_init = family_name_init)
 
 #error pages
 #invalid URL

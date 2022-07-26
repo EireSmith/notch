@@ -1,20 +1,29 @@
 {% extends "base.html" %}
 {% block title %}{{ first_name|lower|trim }}'s invoices{% endblock %}
+{% block home_nav %}
+<div class="nav">
+   <ul class="dot_list">
+       <li ><a id="notch" class="btn btn-info" href="/"></a></li>
+       <li><a id="job_search" class="btn btn-info" href="/invoices"></a></li>
+   </ul>
+</div> 
+{% endblock %}
 {% block content %}
 
                 <div id="job_search">
                     <div class="inputField">
-                        <input style="font-size: 15px" id="keyword" type="text" placeholder="keywords">
-                        <input style="font-size: 15px" id="location" type="text" placeholder="location">
-                        <button><i class="fas fa-plus"></i></button>
+                        {% for invoice in invoices %}
+                        <tr id="tab_row">
+                            <td>{{invoice.filename}}</td>
+                            <td>{{invoice.job_title}}</td>
+                            <td id="invoice_download_btn"><a href= "{{ url_for('views.download_invoice', id=invoice.id) }}" class="btn btn-primary submitSignUp"></a></td>
+
+
+                        </tr>
+                        
+                        {% endfor %}
                     </div>
                 </div> 
-                {% for invoice in contract.invoices %}
-                <tr id="tab_row">
-                    <td>{{invoice.invoice_data}}</td>
 
-                </tr>
-                
-                {% endfor %}
 
 {% endblock %}

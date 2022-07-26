@@ -26,8 +26,8 @@
                         <td >{{contract.date_start}}</td>
                         <td>{{contract.date_end}}</td>
                         <td>{{contract.pay_rate}}</td>
-                        <td id="delete_btn"><button class="delete_btn" onClick="deleteContract({{contract.id}})"><i class="fa fa-ban"></i></button></td>
-                        <td id="update_btn"><button class="update_btn" onClick="updateContract({{contract.id}})"><i class="fa fa-ban"></i></button></td>
+                        <td id="delete_btn"><a class="btn btn-primary submitSignUp" onClick="deleteContract({{contract.id}})"></a></td>
+                        <td id="update_btn"><a class="btn btn-primary submitSignUp" onClick="updateContract({{contract.id}})"></a></td>
                         <td id="invoice_upload_btn"><a href="/upload?id={{contract.id}}" class="btn btn-primary submitSignUp"></a></td>
                         <td id="invoice_download_btn"><a href= "{{ url_for('views.download_invoice', id=contract.id) }}" class="btn btn-primary submitSignUp"></a></td>
                     </tr>

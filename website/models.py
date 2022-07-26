@@ -21,9 +21,8 @@ class Contract(db.Model):
   pay_rate = db.Column(db.Numeric(6,2))
   date_added = db.Column(db.DateTime(timezone=True), default=func.now())
   user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-  invoice = db.relationship("Invoice", back_populates="contract", uselist=False)
+  invoice = db.relationship("Invoice", cascade="all,delete", back_populates="contract", uselist=False)
   
-
 class Invoice(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   filename = db.Column(db.String(255))
@@ -32,3 +31,8 @@ class Invoice(db.Model):
   contract_id = db.Column(db.Integer, db.ForeignKey('contract.id'))
   contract = db.relationship("Contract", back_populates="invoice")
 
+  def get_user_invoice(id):
+      # return invoices for current user
+        invoices = db.session.query(User.first_name, Contract.job_title, Invoice.id, Invoice.filename).select_from(Invoice).join(Contract).join(User).filter(User.id == id).all()
+        return invoices
+        
