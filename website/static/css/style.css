@@ -153,7 +153,7 @@ body{
 }
 
 .avrg{
-  background-color: #721ce3;
+
   margin-left: auto;
   margin-right: auto;
   width: 40%;
@@ -181,6 +181,16 @@ float: left;
   float: right;
 }
 
+.notch_field {
+  height: 100%;
+  outline: none;
+  border-radius: 20px;
+  border: 1px solid #99ccff;
+  font-size: 17px;
+  transition: all .5s ease;
+  text-align: center;
+  margin-left: 5px;
+}
 
 .inputField input{
   height: 100%;
@@ -214,7 +224,7 @@ float: left;
   border-color: #ccffcc;
 }
 
-.inputField button{
+.inputField button, #delete_btn{
   width: 50px;
   height: 100%;
   border: none;
@@ -367,4 +377,14 @@ ul{
   pointer-events: auto;
 }
 
-/*JOB SEARCH EXCLUSIVES*/
+
+
+/* invoices.html */
+.invoice_cell{
+  background-color: red;
+  text-align: center;
+  margin: 10px;
+  height: 50%;
+  width: 20%;
+  float: left;
+}

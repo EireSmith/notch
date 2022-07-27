@@ -58,8 +58,3 @@ function updateContract(contract_id) {
 }).then((_res)=> {window.location.href = "/"})
 };
 
-
-function deleteInvoice(invoice_id) {
-  fetch("/delete_invoice", {method: "POST", body: JSON.stringify({ invoice_id: invoice_id})
-}).then((_res)=> {window.location.href = "/"})
-};

@@ -3,8 +3,8 @@
  {% block home_nav %}
  <div class="nav">
     <ul class="dot_list">
-        <li ><a id="notch" class="btn btn-info" href="/"></a></li>
-        <li><a id="job_search" class="btn btn-info" href="/invoices"></a></li>
+        <li><a id="notch" class="btn btn-info" href="/"></a></li>
+        <li><a id="invoices" class="btn btn-info" href="/invoices"></a></li>
     </ul>
 </div> 
  {% endblock %}
@@ -21,11 +21,11 @@
             <table id='table' >
                 <tbody id="table_body">
                     {% for contract in user.contracts %}
-                    <tr id="tab_row">
-                        <td>{{contract.job_title}}</td>
+                    <tr class="notch_field">
+                        <td >{{contract.job_title}}</td>
                         <td >{{contract.date_start}}</td>
-                        <td>{{contract.date_end}}</td>
-                        <td>{{contract.pay_rate}}</td>
+                        <td >{{contract.date_end}}</td>
+                        <td >{{contract.pay_rate}}</td>
                         <td id="delete_btn"><a class="btn btn-primary submitSignUp" onClick="deleteContract({{contract.id}})"></a></td>
                         <td id="update_btn"><a class="btn btn-primary submitSignUp" onClick="updateContract({{contract.id}})"></a></td>
                         <td id="invoice_upload_btn"><a href="/upload?id={{contract.id}}" class="btn btn-primary submitSignUp"></a></td>

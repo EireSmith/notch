@@ -4,23 +4,20 @@
 <div class="nav">
    <ul class="dot_list">
        <li ><a id="notch" class="btn btn-info" href="/"></a></li>
-       <li><a id="job_search" class="btn btn-info" href="/invoices"></a></li>
+       <li><a id="invoices" class="btn btn-info" href="/invoices"></a></li>
    </ul>
 </div> 
 {% endblock %}
 {% block content %}
 
-                <div id="job_search">
-                    <div class="inputField">
+                <div id="main_container">
+                    <div class="invoice_grid">
                         {% for invoice in invoices %}
-                        <tr id="tab_row">
-                            <td>{{invoice.filename}}</td>
-                            <td>{{invoice.job_title}}</td>
-                            <td id="invoice_download_btn"><a href= "{{ url_for('views.download_invoice', id=invoice.id) }}" class="btn btn-primary submitSignUp"></a></td>
-
-
-                        </tr>
-                        
+                        <div class="invoice_cell">
+                            <div class="invoice_name">{{invoice.filename}}</div>
+                            <div class="invoice_job">{{invoice.job_title}}</div>
+                            <div class="invoice_download_btn"><a href= "{{ url_for('views.download_invoice', id=invoice.id) }}" class="btn btn-primary submitSignUp"></a></div>
+                        </div>
                         {% endfor %}
                     </div>
                 </div> 
