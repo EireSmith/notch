@@ -11,7 +11,7 @@ def create_app():
     app = Flask(__name__)
     app.secret_key = '324390jgf19didqjw0jifwv'
     # app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'  #locating the databse (sqlite, old) 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://hbrbxqjsftpeze:3df463dcea0a49b379e4fa92c63f92e18f663ed18d6bdaee02db6189bd207e6e@ec2-54-246-185-161.eu-west-1.compute.amazonaws.com:5432/d8jdbjj2rah3lt'  #locating the databse 
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://hbrbxqjsftpeze:3df463dcea0a49b379e4fa92c63f92e18f663ed18d6bdaee02db6189bd207e6e@ec2-54-246-185-161.eu-west-1.compute.amazonaws.com:5432/d8jdbjj2rah3lt'  #locating the databse 
 
     db.init_app(app)
 
@@ -35,8 +35,8 @@ def create_app():
 
     return app
 
-def create_database(app):
-    if not path.exists('website/' + DB_NAME):
-        db.create_all(app=app)
-        print('Database Created')
+# def create_database(app):
+#      if not path.exists('website/' + DB_NAME):
+#         db.create_all(app=app)
+#         print('Database Created')
 
