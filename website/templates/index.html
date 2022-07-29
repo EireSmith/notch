@@ -20,7 +20,7 @@
         <div class =tab_div>
             <table id='table' >
                 <tbody id="table_body">
-                    {% for contract in user.contracts %}
+                    {% for contract in user.contracts |groupby('date_added') %}
                     <tr class="notch_field">
                         <td >{{contract.job_title}}</td>
                         <td >{{contract.date_start}}</td>

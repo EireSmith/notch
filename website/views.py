@@ -20,8 +20,9 @@ def index():
 
   #get data from current user
   curr_user = current_user.id
+
+# GETTING DATA FOR AVERAGE DAY/PAY
   contract_query = Contract.query.filter(Contract.user_id == curr_user).all()
-  
   #populate date lists with string values
   for s in contract_query:
     s = str(s.date_start)
@@ -40,7 +41,7 @@ def index():
 
   int_average_pay = average_pay(rates)
 
-  
+  # VALIDATING FORM DATA FOR DB SUBMISSION
   if request.method == 'POST':
         date_format = '%Y-%m-%d'
         job = request.form.get('job')
@@ -59,6 +60,7 @@ def index():
         if pay == None or pay == "":
           pay = 0
 
+        # SUBMITTING FORM DATA TO DB
         new_contract = Contract(job_title=job, date_start=start, date_end=end, pay_rate=pay, user_id=current_user.id)
         db.session.add(new_contract)
         db.session.commit()
@@ -92,7 +94,10 @@ def delete_contract():
 @views.route('/update_notch', methods=['POST'])
 @login_required
 def update_contract():
+      # ADD DATE FORMAT VARIABLE FOR DATETIME OBJECTS
       date_format = '%Y-%m-%d'
+      
+      # GET FORM DATA
       json_file = json.loads(request.data) # take in data as post req
       contract_id= json_file["contract_id"]
       contract = Contract.query.get_or_404(contract_id)
@@ -100,7 +105,8 @@ def update_contract():
       start = json_file["start"]
       end = json_file["end"]
       pay = json_file["pay"]
-      
+
+      # VALIDATING UPDATE DATA
       if contract:
         if contract.user_id == current_user.id:
           if job == "":
