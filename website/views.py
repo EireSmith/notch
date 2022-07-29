@@ -63,6 +63,8 @@ def index():
         db.session.add(new_contract)
         db.session.commit()
         flash('notch added', category='success')
+        return redirect(url_for("views.index"))
+ 
        
   first_name= current_user.first_name
   first_name_init =list(first_name)[0]
@@ -160,7 +162,6 @@ def upload_invoice():
 @views.route('/download/<int:id>', methods=['GET'])
 @login_required
 def download_invoice(id):
-  
   user_contracts = Contract.query.with_entities(Contract.id).filter(Contract.user_id == current_user.id).all()
   for u in user_contracts:
     if id in u:
@@ -171,15 +172,18 @@ def download_invoice(id):
   flash('no invoice attatched', category="error")
   return redirect(url_for("views.index"))
 
+
 @views.route('/invoices', methods =["GET"])
 @login_required
-def search():
+def invoices():
 
   first_name= current_user.first_name
   first_name_init =list(current_user.first_name)[0]
   family_name_init = list(current_user.family_name)[0]
-  invoice_ids = Invoice.get_user_invoice(current_user.id)
-  return render_template("invoices.html", invoices = invoice_ids, user = current_user, first_name = first_name, first_name_init = first_name_init, family_name_init = family_name_init)
+  # call function from models.py to get user invoices
+  invoice_data = Invoice.get_user_invoice(current_user.id)
+  print(invoice_data)
+  return render_template("invoices.html", invoices = invoice_data, user = current_user, first_name = first_name, first_name_init = first_name_init, family_name_init = family_name_init)
 
 #error pages
 #invalid URL
