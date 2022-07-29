@@ -33,6 +33,7 @@ class Invoice(db.Model):
 
   def get_user_invoice(id):
       # return invoices for current user
-        invoices = db.session.query(User.first_name, Contract.job_title, Invoice.id, Invoice.filename).select_from(Invoice).join(Contract).join(User).filter(User.id == id).all()
+        invoices = db.session.query(Contract.job_title, Invoice.id, Invoice.filename).select_from(Invoice).join(Contract).join(User).filter(User.id == id).all()
+        
         return invoices
         
