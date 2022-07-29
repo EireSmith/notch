@@ -21,8 +21,11 @@ def index():
   #get data from current user
   curr_user = current_user.id
 
-# GETTING DATA FOR AVERAGE DAY/PAY
+
   contract_query = Contract.query.filter(Contract.user_id == curr_user).all()
+  
+
+  # GETTING DATA FOR AVERAGE DAY/PAY
   #populate date lists with string values
   for s in contract_query:
     s = str(s.date_start)
@@ -71,7 +74,7 @@ def index():
   first_name= current_user.first_name
   first_name_init =list(first_name)[0]
   family_name_init = list(current_user.family_name)[0]
-  return render_template("index.html", user = current_user, first_name = first_name, first_name_init = first_name_init, family_name_init = family_name_init, average_days = int_average_days, average_pay = int_average_pay)
+  return render_template("index.html", contract_query = contract_query, user = current_user, first_name = first_name, first_name_init = first_name_init, family_name_init = family_name_init, average_days = int_average_days, average_pay = int_average_pay)
 
 
 
