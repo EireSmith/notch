@@ -58,3 +58,7 @@ function updateContract(contract_id) {
 }).then((_res)=> {window.location.href = "/"})
 };
 
+function filesize(file){
+
+  document.cookie = `filesize=${file.files[0].size}`;
+}

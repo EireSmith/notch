@@ -7,9 +7,35 @@ from . import db
 import datetime
 import json
 from .averages import average_days, average_pay
+from werkzeug.utils import secure_filename
 
 views = Blueprint('views', __name__)
- 
+allowed_file_ext = ["DOC", "DOX", "PDF", "JPEG", "JPG","PNG", "XLSX", "XLS"]
+max_filesize = 1000000
+
+def allowed_file(filename):
+  if not "." in filename:
+    return False
+
+  # split on "." and get the extension element on the right.
+  ext = filename.rsplit(".", 1)[1]
+
+  if ext.upper() in allowed_file_ext:
+    return True
+  else:
+    return False
+
+
+
+def allowed_filesize(filesize):
+   
+  if int(filesize) > max_filesize:
+    return False
+  else:
+    return True
+
+
+
 
 @views.route('/', methods=['GET', 'POST'])
 @login_required
@@ -20,12 +46,11 @@ def index():
 
   #get data from current user
   curr_user = current_user.id
-
-
-  contract_query = Contract.query.filter(Contract.user_id == curr_user).all()
+  # CHECKING IF INVOICE EXISTS
   
-
   # GETTING DATA FOR AVERAGE DAY/PAY
+  contract_query = Contract.query.filter(Contract.user_id == curr_user).all()
+
   #populate date lists with string values
   for s in contract_query:
     s = str(s.date_start)
@@ -69,12 +94,13 @@ def index():
         db.session.commit()
         flash('notch added', category='success')
         return redirect(url_for("views.index"))
- 
-       
+
+  # GET INVOICED CONTRACTS TO CHANGE DOWNLAOD BUTTON STYLE
+  invoiced_contracts = Invoice.get_user_invoiced_contracts(curr_user)
   first_name= current_user.first_name
   first_name_init =list(first_name)[0]
   family_name_init = list(current_user.family_name)[0]
-  return render_template("index.html", contract_query = contract_query, user = current_user, first_name = first_name, first_name_init = first_name_init, family_name_init = family_name_init, average_days = int_average_days, average_pay = int_average_pay)
+  return render_template("index.html", invoiced_contracts = invoiced_contracts, contract_query = contract_query, user = current_user, first_name = first_name, first_name_init = first_name_init, family_name_init = family_name_init, average_days = int_average_days, average_pay = int_average_pay)
 
 
 
@@ -145,24 +171,45 @@ def update_contract():
 @login_required
 def upload_invoice():
   if request.method == 'POST':
+
+      if not allowed_filesize(request.cookies.get("filesize")):
+        flash('file must be less than 1mb', category="error")
+        return redirect(url_for("views.index"))
+
+
+      #  takes file from submit form
+      file = request.files["file"]
      # takes in contract_id  from URL
       contract_id = request.args.get('id')
       user_contracts = Contract.query.with_entities(Contract.id).filter(Contract.user_id == current_user.id).all()
+
       permission = False
       for u in user_contracts:
         if int(contract_id) in u:
           permission = True
 
+      if  permission == False:
+        flash('access denied', category="error")
+        return redirect(url_for("views.index"))
+
       exists = Invoice.query.filter(Invoice.contract_id == contract_id).first() #checking if invoice exists
-      if exists or permission == False:
+      if exists:
         flash('invoice already attached', category="error")
+        return redirect(url_for("views.index"))
+      
+      if not allowed_file(file.filename):
+        flash('image extension not allowed', category="error")
+        return redirect(url_for("views.index"))
+        
       else:
-        #  takes file from submit form
-        file = request.files["file"]
+        filename = secure_filename(file.filename)
         # adds invoice to database
-        invoice = Invoice(filename=file.filename, invoice_data = file.read(), contract_id = contract_id)
+        invoice = Invoice(filename=filename, invoice_data = file.read(), contract_id = contract_id)
         db.session.add(invoice)
         db.session.commit()
+        flash('file upload successful', category="success")
+
+
         return redirect(url_for("views.index"))
   return render_template("upload.html", user = current_user)
 
@@ -191,16 +238,5 @@ def invoices():
   family_name_init = list(current_user.family_name)[0]
   # call function from models.py to get user invoices
   invoice_data = Invoice.get_user_invoice(current_user.id)
-  print(invoice_data)
+  # print(invoice_data)
   return render_template("invoices.html", invoices = invoice_data, user = current_user, first_name = first_name, first_name_init = first_name_init, family_name_init = family_name_init)
-
-#error pages
-#invalid URL
-@views.errorhandler(404)
-def page_not_found(e):
-  return render_template("error_pages/404.html"), 404
-
-@views.errorhandler(500)
-def page_not_found(e):
-  return render_template("error_pages/500.html"), 500
-

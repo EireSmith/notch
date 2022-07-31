@@ -22,6 +22,7 @@ class Contract(db.Model):
   date_added = db.Column(db.DateTime(timezone=True), default=func.now())
   user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
   invoice = db.relationship("Invoice", cascade="all,delete", back_populates="contract", uselist=False)
+
   
 class Invoice(db.Model):
   id = db.Column(db.Integer, primary_key=True)
@@ -36,4 +37,12 @@ class Invoice(db.Model):
         invoices = db.session.query(Contract.job_title, Contract.id, Invoice.filename).select_from(Invoice).join(Contract).join(User).filter(User.id == id).all()
         
         return invoices
-        
+  
+  # Get List of Contract IDs which contain an Invoice
+  def get_user_invoiced_contracts(id):
+      
+      invoice_contract_ids = db.session.query(Invoice.contract_id).join(Contract).filter(Contract.user_id == id).all()
+      invoice_contract_ids = [item for i in invoice_contract_ids for item in i]
+      return invoice_contract_ids
+
+
