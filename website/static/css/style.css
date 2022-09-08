@@ -236,7 +236,7 @@ align-items: center;
 border-spacing: 15px 0px;}
 
 table { width: 100%;}
-
+table tr{margin-top: 10px}
 table td:not(.b)
 {height: 45px;
 border-radius: 20px;
