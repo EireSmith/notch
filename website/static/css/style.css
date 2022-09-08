@@ -200,8 +200,8 @@ width:100%;
 margin: auto;
 }
 
-input.pay{width: 10%;}
-input.job{width: 40%;}
+input #pay{width: 10%;}
+input #job{width: 40%;}
 
 
 .inputField input:focus{
@@ -241,67 +241,71 @@ align-items: center;
 border-collapse:separate;
 border-spacing:10px 10px;}
 
-table td:not(.b)
-{height: 45px;
-border-radius: 20px;
-  outline: none;
-  font-size: 17px;
-background-color: white;
-  text-align: center;
-
+table td:not(.b){
+	height: 45px;
+	border-radius: 20px;
+	outline: none;
+	font-size: 17px;
+	background-color: white;
+	text-align: center;
 }
 
-td.job{width: 47%;}
+td.job_title{
+	width: 47%;
+}
 
-td.start{width: 15%;}
+td.date_start{
+	width: 15%;
+}
 
-td.end{
-width: 15%;}
+td.date_end{
+	width: 15%;
+}
 
-td.pay{width: 5%;}
+td.pay_rate{width: 5%;}
 
-  .notch_view a {
-    height: 30px;
-    width: 30px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    position: relative;
-    border-radius: 15px!important;
-  }
+.notch_view a {
+	height: 30px;
+	width: 30px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	justify-content: center;
+	position: relative;
+	border-radius: 15px!important;
+}
 
 
 .footer{
-  width: 100%;
-  align-items: center;
-text-align: center;
-  justify-content: space-between;
+	width: 100%;
+	align-items: center;
+	text-align: center;
+	justify-content: space-between;
 }
 
 .button_div{
-display: inline-block;
-margin: auto;}
+	display: inline-block;
+	margin: auto;
+}
 
 .footer button{
-  padding: 6px 10px;
-  border-radius: 3px;
-  border: none;
-  outline: none;
-  color: #fff;
-  font-weight: 400;
-  font-size: 16px;
-  margin-left: 5px;
-  background: #8E49E8;
-  cursor: pointer;
-  opacity: 0.6;
-  transition: all 0.3s ease;
+	padding: 6px 10px;
+	border-radius: 3px;
+	border: none;
+	outline: none;
+	color: #fff;
+	font-weight: 400;
+	font-size: 16px;
+	margin-left: 5px;
+	background: #8E49E8;
+	cursor: pointer;
+	opacity: 0.6;
+	transition: all 0.3s ease;
 }
 .footer button.active{
-  opacity: 1;
-  pointer-events: auto;
+	opacity: 1;
+	pointer-events: auto;
 }
-
 
 
 /* invoices.html */
