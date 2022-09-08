@@ -193,7 +193,7 @@ width:100%;
   height: 100%;
   outline: none;
   border-radius: 20px;
-  border: 10px solid #99ccff;
+  border: 1px solid #99ccff;
   font-size: 17px;
   transition: all .5s ease;
   text-align: center;
@@ -208,12 +208,16 @@ input.job{width: 40%;}
   border-color: #ccffcc;
 }
 
+.input_buttons{
+	width: auto;
+}
+	
 .inputField button{
   width: 30px;
   height: 30px;
-  border: none;
+
   color: #fff;
-  margin: auto;
+
   font-size: 21px;
   outline: none;
 align-items: center;
