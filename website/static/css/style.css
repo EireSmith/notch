@@ -162,6 +162,7 @@ inputField {
 	width: 100%}
 
 inputField .input_group{
+	margin-left: 10px;
 	width: 90%;
 }
 
