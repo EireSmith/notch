@@ -62,7 +62,7 @@ body{
   border: 5px solid #99ccff;
   border-radius: 50px;
   text-decoration: none;
-  background-color:red;
+  backgound-colour: 
   font-size: 17px;
   display: block;
 }
@@ -132,12 +132,12 @@ body{
 }
 
 #main_container{
-
+padding: 2%;
   background: #99ccff;
   margin: auto;
   margin-top: 0px;
   width: 100%;  
-  padding: 2%;
+  
   border-radius: 20px;
   box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
   overflow: hidden;
@@ -145,15 +145,21 @@ body{
 }
 
 #main_container .inputField{
-
-  margin: 10px 0;
+margin: 10px 0px;
   width: 100%;
   display: flex;
   height: 45px;
 }
 
-.avrg{
+#home{
+margin: auto;
+width:100%;
+}
 
+
+
+
+.avrg{
   margin-left: auto;
   margin-right: auto;
   width: 40%;
@@ -181,18 +187,9 @@ float: left;
   float: right;
 }
 
-.notch_field {
-  height: 100%;
-  outline: none;
-  border-radius: 20px;
-  border: 1px solid #99ccff;
-  font-size: 17px;
-  transition: all .5s ease;
-  text-align: center;
-  margin-left: 5px;
-}
 
 .inputField input{
+width:100%;
   height: 100%;
   outline: none;
   border-radius: 20px;
@@ -200,38 +197,26 @@ float: left;
   font-size: 17px;
   transition: all .5s ease;
   text-align: center;
-  margin-left: 5px;
+margin: auto;
 }
 
-.inputField .job{
-  width: 100%;
-}
-
-.inputField .start{
-  width: 50%;
-}
-
-.inputField .end{
-  width: 50%;
-}
-
-.inputField .pay{
-  width: 35%;
-}
+input.pay{width: 10%;}
+input.job{width: 40%;}
 
 
 .inputField input:focus{
   border-color: #ccffcc;
 }
 
-.inputField button, .delete_btn{
+.inputField button{
   width: 30px;
   height: 30px;
   border: none;
   color: #fff;
-  margin-left: 5px;
+  margin: auto;
   font-size: 21px;
   outline: none;
+align-items: center;
   background: #8E49E8;
   cursor: pointer;
   border-radius: 15px;
@@ -247,108 +232,29 @@ float: left;
   pointer-events: auto;
 }
 
-.list{
-  margin: 10px 0;
-  width: 100%;
-  display: inline;
-}
-ul{
-  margin-right: 10px;
- 
-}
+#table{border-collapse: separate;
+border-spacing: 15px 0px;}
 
-.jobList li{
-  list-style: none;
-  height: 45px;
-  line-height: 45px;
-  margin-bottom: 8px;
-  background: #f2f2f2;
-  border-radius: 20px;
-  padding: 0 15px;
-  cursor: default;
-  overflow: hidden;
-}
+table { width: 100%;}
 
-
-.jobList li .icon{
-  position: inherit;
-  right:-45px;
-  background: #e74c3c;
-  width: 45px;
+table td:not(.b)
+{height: 45px;
+border-radius: 20px;
+  outline: none;
+  font-size: 17px;
+background-color: white;
   text-align: center;
-  color: #fff;
-  border-radius: 0 3px 3px 0;
-  cursor: pointer;
-  transition: all .5s ease;
-}
-.jobList li:hover .icon{
-  right: 0px;
+
 }
 
-.jobList{
-  width: 37%;
-  float: none;
-  display: inline-block;
-  
-}
+td.job{width: 47%;}
 
-.startList{
-  width: 20%;
-  float: none;
-  display: inline-block;
-}
-.endList{
-  width: 20%;
-  float: none;
-  display: inline-block;
-}
-.payList{
-  width: 15%;
-  float: none;
-  display: inline-block;
-}
+td.start{width: 15%;}
 
-.startList li{
- 
-  width: 100%;
-  list-style: none;
-  height: 45px;
-  line-height: 45px;
-  margin-bottom: 8px;
-  background: #f2f2f2;
-  border-radius: 20px;
-  padding: 0 15px;
-  cursor: default;
-  overflow: hidden;
-}
+td.end{
+width: 15%;}
 
-.endList li{
-  width: 100%;
-  list-style: none;
-  height: 45px;
-  line-height: 45px;
-  margin-bottom: 8px;
-  background: #f2f2f2;
-  border-radius: 20px;
-  padding: 0 15px;
-  cursor: default;
-  overflow: hidden;
-}
-
-
-.payList li{
-  width: 100%;
-  list-style: none;
-  height: 45px;
-  line-height: 45px;
-  margin-bottom: 8px;
-  background: #f2f2f2;
-  border-radius: 20px;
-  padding: 0 15px;
-  cursor: default;
-  overflow: hidden;
-}
-
+td.pay{width: 5%;}
 
   .notch_view a {
     height: 30px;
@@ -362,24 +268,17 @@ ul{
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-.wrapper .footer{
-  display: flex;
+.footer{
   width: 100%;
-  margin-top: 20px;
   align-items: center;
+text-align: center;
   justify-content: space-between;
 }
+
+.button_div{
+display: inline-block;
+margin: auto;}
+
 .footer button{
   padding: 6px 10px;
   border-radius: 3px;
