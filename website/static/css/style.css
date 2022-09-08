@@ -217,7 +217,8 @@ border-collapse:separate;
 border-spacing:10px 10px;}
 
 table td:not(.b){
-	overflow: hidden;
+	overflow-x: auto;
+	overflow-y: hidden;
 	white-space: nowrap;
 	height: 45px;
 	border-radius: 20px;
@@ -229,7 +230,7 @@ table td:not(.b){
 
 td.job_title{
 	width: 30%;
-	overflow: hidden;
+	max-width: 30%;
 }
 
 td.date_start{
