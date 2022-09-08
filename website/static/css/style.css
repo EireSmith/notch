@@ -162,7 +162,7 @@ inputField {
 	width: 100%}
 
 .input_group{
-	margin-left: 20px;
+	margin-left: 10px;
 	width: 90%;
 }
 
@@ -186,16 +186,18 @@ margin: auto;
 }
 
 
-	
+.add_button{
+	text-align: center;
+	m
+}
 .inputField button{
+  margin: auto;
   width: 30px;
   height: 30px;
-
   color: #fff;
-
   font-size: 21px;
   outline: none;
-align-items: center;
+  align-items: center;
   background: #8E49E8;
   cursor: pointer;
   border-radius: 15px;
