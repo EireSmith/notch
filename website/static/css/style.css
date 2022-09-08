@@ -217,7 +217,8 @@ border-collapse:separate;
 border-spacing:10px 10px;}
 
 table td:not(.b){
-	
+	overflow: hidden;
+	white-space: nowrap;
 	height: 45px;
 	border-radius: 20px;
 	outline: none;
