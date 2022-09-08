@@ -187,9 +187,10 @@ float: left;
   float: right;
 }
 
+inputField {
+	width: 100%}
 
 .inputField input{
-width:100%;
   height: 100%;
   outline: none;
   border-radius: 20px;
