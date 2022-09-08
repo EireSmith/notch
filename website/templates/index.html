@@ -12,11 +12,15 @@
  {% block content %}
     <div id="home" >
         <form class="inputField" method="POST"> 
+         <div class="input_group">
             <input style="font-size: 15px" name ="job" id="job" type="text" placeholder="notch title">
             <input style="font-size: 15px"  name ="start"id="start" type="date" placeholder="start">
             <input style="font-size: 15px" name ="end" id="end" type="date"  placeholder="end">
             <input style="font-size: 15px" name ="pay" id="pay" type="number" min="0" step="any" placeholder="rate">
+         </div>
+         <div class="add_button">
             <button ><i type="submit" class="fa fa-plus"></i></button>
+         </div>
         </form>
         <div class =tab_div>
             <table id='table' >
