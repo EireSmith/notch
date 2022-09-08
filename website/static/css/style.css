@@ -232,12 +232,10 @@ align-items: center;
   pointer-events: auto;
 }
 
-#table{border-collapse: separate;
-border-spacing: 15px 0px;}
 
 table { width: 100%;
 border-collapse:separate;
-border-spacing:0 15px;}
+border-spacing:15px 15px;}
 
 table td:not(.b)
 {height: 45px;
