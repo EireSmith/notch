@@ -213,12 +213,12 @@ align-items: center;
 
 
 #table { width: 100%;
+	max-width: 1000px;
 border-collapse:separate;
 border-spacing:10px 10px;}
 
 table td:not(.b){
-	overflow-x: auto;
-	overflow-y: hidden;
+
 	white-space: nowrap;
 	height: 45px;
 	border-radius: 20px;
@@ -229,8 +229,11 @@ table td:not(.b){
 }
 
 td.job_title{
+	overflow-x: auto;
+	overflow-y: hidden;
 	width: 30%;
 	max-width: 30%;
+
 }
 
 td.date_start{
