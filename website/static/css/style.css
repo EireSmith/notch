@@ -158,37 +158,12 @@ width:100%;
 
 
 
-
-.avrg{
-  margin-left: auto;
-  margin-right: auto;
-  width: 40%;
-  padding: auto;
-  margin-top: 50px;
-  text-align: center;
-}
-
-.day_avrg , .pay_avrg{
-  background-color: red;
-  width: 150px;
-  height: 15%;
-  padding: 20%;
-  text-align: center;
-  padding: 25px;
-  border-radius: 20px;
-  box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
-} 
-.day_avrg{
-float: left;
-
-}
-
-.pay_avrg{
-  float: right;
-}
-
 inputField {
 	width: 100%}
+
+inputField .input_group{
+	width: 80%;
+}
 
 .inputField input{
   height: 100%;
@@ -209,9 +184,7 @@ margin: auto;
   border-color: #ccffcc;
 }
 
-.input_buttons{
-	width: auto;
-}
+
 	
 .inputField button{
   width: 30px;
@@ -276,7 +249,9 @@ td.pay_rate{width: 5%;}
 	border-radius: 15px!important;
 }
 
-
+.input_buttons{
+	width: auto;
+}
 .footer{
 	width: 100%;
 	align-items: center;
@@ -308,6 +283,35 @@ td.pay_rate{width: 5%;}
 	pointer-events: auto;
 }
 
+
+
+.avrg{
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  padding: auto;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.day_avrg , .pay_avrg{
+  background-color: red;
+  width: 150px;
+  height: 15%;
+  padding: 20%;
+  text-align: center;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
+} 
+.day_avrg{
+float: left;
+
+}
+
+.pay_avrg{
+  float: right;
+}
 
 /* invoices.html */
 .invoice_cell{
