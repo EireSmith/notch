@@ -12,10 +12,10 @@
  {% block content %}
     <div id="home" >
         <form class="inputField" method="POST"> 
-            <input style="font-size: 15px" name ="job" id="job" type="text" placeholder="notch title">
-            <input style="font-size: 15px"  name ="start"id="start" type="date" placeholder="start">
-            <input style="font-size: 15px" name ="end" id="end" type="date"  placeholder="end">
-            <input style="font-size: 15px" name ="pay" id="pay" type="number" min="0" step="any" placeholder="rate">
+            <input style="font-size: 15px" class ="job"  type="text" placeholder="notch title">
+            <input style="font-size: 15px"  class ="start"type="date" placeholder="start">
+            <input style="font-size: 15px" class ="end" type="date"  placeholder="end">
+            <input style="font-size: 15px" class ="pay" type="number" min="0" step="any" placeholder="rate">
             <button ><i type="submit" class="fa fa-plus"></i></button>
         </form>
         <div class =tab_div>
@@ -23,17 +23,17 @@
                 <tbody id="table_body">
                     {% for contract in contract_query |sort(attribute='date_start') %}
                     <tr class="notch_view">
-                        <td class="job_title">{{contract.job_title}}</td>
-                        <td class="date_start">{{contract.date_start}}</td>
-                        <td class="date_end">{{contract.date_end}}</td>
-                        <td class="pay_rate">{{contract.pay_rate}}</td>
-                        <td><a class="btn btn-primary submitSignUp" onClick="deleteContract({{contract.id}})"><i class="fa fa-ban"></i></a></td>
-                        <td><a class="btn btn-primary submitSignUp" onClick="updateContract({{contract.id}})"><i class="fa fa-pencil"></i></a></td>
-                        <td><a href="/upload?id={{contract.id}}" class="btn btn-primary submitSignUp"><i class="fa-solid fa-cloud-arrow-up"></i></a></td>
+                        <td class="job">{{contract.job_title}}</td>
+                        <td class="start">{{contract.date_start}}</td>
+                        <td class="end">{{contract.date_end}}</td>
+                        <td class="pay">{{contract.pay_rate}}</td>
+                        <td class="b"><a class="btn btn-primary submitSignUp" onClick="deleteContract({{contract.id}})"><i class="fa fa-ban"></i></a></td>
+                        <td class="b"><a class="btn btn-primary submitSignUp" onClick="updateContract({{contract.id}})"><i class="fa fa-pencil"></i></a></td>
+                        <td class="b"><a href="/upload?id={{contract.id}}" class="btn btn-primary submitSignUp"><i class="fa-solid fa-cloud-arrow-up"></i></a></td>
                         {% if contract.id in invoiced_contracts%}
-                            <td><a href= "{{ url_for('views.download_invoice', id= contract.id) }}" class="btn btn-primary submitSignUp"><i class="fa-solid fa-cloud-arrow-down" ></i></a></td>
+                            <td class ="b"><a href= "{{ url_for('views.download_invoice', id= contract.id) }}" class="btn btn-primary submitSignUp"><i class="fa-solid fa-cloud-arrow-down" ></i></a></td>
                         {% else %}
-                            <td style="opacity: 50%;"><a href= "{{ url_for('views.download_invoice', id= contract.id) }}" class="btn btn-primary submitSignUp" style="background-color: red;pointer-events: none;"><i class="fa-solid fa-cloud-arrow-down" ></i></a></td>
+                            <td class="b" style="opacity: 50%;"><a href= "{{ url_for('views.download_invoice', id= contract.id) }}" class="btn btn-primary submitSignUp" style="background-color: red;pointer-events: none;"><i class="fa-solid fa-cloud-arrow-down" ></i></a></td>
                         {% endif %}
                     </tr>
                     
@@ -43,8 +43,10 @@
         </div>
     </div>
     <div class ='footer'>
-        <button class="showbtn" onClick="showContracts()"><i class="fa fa-chevron-down"></i></button>
-        <button class="clearbtn" onClick="hideContracts()" ><i class="fa fa-chevron-up"></i></button>   
+     		<div class = "button_div">
+         <button class="showbtn" onClick="showContracts()"><i class="fa fa-chevron-down"></i></button>
+         <button class="clearbtn" onClick="hideContracts()" ><i class="fa fa-chevron-up"></i></button>
+       </div>
     </div>
 {% endblock %}
 
