@@ -193,7 +193,7 @@ width:100%;
   height: 100%;
   outline: none;
   border-radius: 20px;
-  border: 1px solid #99ccff;
+  border: 10px solid #99ccff;
   font-size: 17px;
   transition: all .5s ease;
   text-align: center;
@@ -233,9 +233,9 @@ align-items: center;
 }
 
 
-table { width: 100%;
+#table { width: 100%;
 border-collapse:separate;
-border-spacing:15px 15px;}
+border-spacing:10px 10px;}
 
 table td:not(.b)
 {height: 45px;
