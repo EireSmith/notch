@@ -27,7 +27,7 @@
 body{
   width: 100%;
   height: 100vh;
-  overflow: hidden;
+  overflow: auto;
   background: #ccffcc;
 
 }
@@ -228,6 +228,7 @@ table td:not(.b){
 
 td.job_title{
 	width: 30%;
+	overflow: hidden;
 }
 
 td.date_start{
@@ -322,11 +323,4 @@ float: left;
   height: 50%;
   width: 20%;
   float: left;
-}
-.invoice{
-	width: 50%;
-	text-align: center;
-	margin: auto;
-	border-radius: 2px;
-	border-color: red;
 }
