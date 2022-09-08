@@ -14,9 +14,11 @@
                     <div class="invoice_grid">
                         {% for invoice in invoices %}
                         <div class="invoice_cell">
-                            <div class="invoice_name"><i class="fa-regular fa-file"></i></div>
-                            <div class="invoice_job">{{invoice.job_title}}</div>
-                            <div class="invoice_download_btn"><a href= "{{ url_for('views.download_invoice', id=invoice.id) }}" class="btn btn-primary submitSignUp"></a></div>
+                           <div class="invoice"
+                               <div class="invoice_name"><i class="fa-regular fa-file"></i></div>
+                               <div class="invoice_job">{{invoice.job_title}}</div>
+                           </div>
+                           <div class="invoice_download_btn"><a href= "{{ url_for('views.download_invoice', id=invoice.id) }}" class="btn btn-primary submitSignUp"></a></div>
                         </div>
                         {% endfor %}
                     </div>
