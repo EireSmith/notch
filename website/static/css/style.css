@@ -162,7 +162,7 @@ inputField {
 	width: 100%}
 
 inputField .input_group{
-	margin-left: 10px;
+	margin-left: 20px;
 	width: 90%;
 }
 
@@ -316,10 +316,16 @@ float: left;
 
 /* invoices.html */
 .invoice_cell{
-  background-color: red;
   text-align: center;
   margin: 10px;
   height: 50%;
   width: 20%;
   float: left;
+}
+.invoice{
+	width: 50%;
+	text-align: center;
+	margin: auto;
+	border-radius: 1px;
+	border-color: red;
 }
