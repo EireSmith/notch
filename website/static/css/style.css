@@ -200,8 +200,8 @@ width:100%;
 margin: auto;
 }
 
-input #pay{width: 10%;}
-input #job{width: 40%;}
+#pay{width: 10%;}
+#job{width: 30%;}
 
 
 .inputField input:focus{
@@ -251,7 +251,7 @@ table td:not(.b){
 }
 
 td.job_title{
-	width: 47%;
+	width: 30%;
 }
 
 td.date_start{
