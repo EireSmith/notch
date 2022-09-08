@@ -217,6 +217,7 @@ border-collapse:separate;
 border-spacing:10px 10px;}
 
 table td:not(.b){
+	
 	height: 45px;
 	border-radius: 20px;
 	outline: none;
@@ -326,6 +327,6 @@ float: left;
 	width: 50%;
 	text-align: center;
 	margin: auto;
-	border-radius: 1px;
+	border-radius: 2px;
 	border-color: red;
 }
