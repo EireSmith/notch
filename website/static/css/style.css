@@ -325,7 +325,7 @@ td.pay_rate{width: 5%;}
 }
 
 .day_avrg , .pay_avrg{
-  background-color: #00A3A3;
+  background-color: #35D5D0;
   width: 150px;
   height: 15%;
   padding: 20%;
@@ -346,6 +346,7 @@ float: left;
 /* invoices.html */
 
 .invoice_cell{
+	border-radius; 25%;
  background-color: #EBEEE0;
   text-align: center;
   margin: 10px;
