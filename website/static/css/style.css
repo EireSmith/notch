@@ -277,6 +277,7 @@ td.pay_rate{width: 5%;}
 
 .button_div{
 	display: inline-block;
+	margin-top: 10px;
 	margin: auto;
 }
 
