@@ -30,6 +30,7 @@ body,
 
 
 body{
+position: static;
   width: 100%;
   overflow: auto;
 }
