@@ -30,7 +30,7 @@ body,
 
 
 body{
-position: static;
+ position: static;
   width: 100%;
   overflow: auto;
 }
@@ -218,6 +218,8 @@ margin: auto;
 
 #table { width: 100%;
 	max-width: 1000px;
+	height: auto;
+	max-height: 50%;
 border-collapse:separate;
 border-spacing:10px 10px;}
 
