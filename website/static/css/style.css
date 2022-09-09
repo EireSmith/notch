@@ -29,14 +29,15 @@ body{
   height: auto;
   overflow: auto;
   background: #ccffcc;
- background-height: auto;
-
+  background-height: auto;
+position: relative;
 }
 
 #wrapper{
   width: 100%;
   height: auto;
   padding: 5%;
+	background-height: auto;
   background-color: rgb(207, 243, 152);
 }
 
