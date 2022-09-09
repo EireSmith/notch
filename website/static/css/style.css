@@ -21,14 +21,6 @@
 
 
 
-html, body{
-	margin: 0;
-	padding: 0;
-	
-background-color: #EBEEE0;
-}	
-
-
 body{
   width: 100%;
   overflow: auto;
@@ -37,6 +29,8 @@ body{
 #wrapper{
   width: 100%;
   padding: 5%;
+  background-color: #EBEEE0;
+	
 }
 
 
