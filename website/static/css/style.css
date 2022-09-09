@@ -24,6 +24,11 @@
   background: rgb(142, 73, 232);
 }
 
+html{
+background-color: #EBEEE0;
+}	
+
+
 body{
   width: 100%;
   height: auto;
@@ -34,7 +39,6 @@ body{
   width: 100%;
   height: auto;
   padding: 5%;
-  background-color: rgb(207, 243, 152);
 }
 
 
