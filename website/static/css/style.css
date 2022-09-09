@@ -130,7 +130,7 @@ body{
   cursor: pointer;
   margin-left: 10px;
   opacity: 50%;
-  background-color: #314E70 !important;
+  background-color: #35D5D0 !important;
 }
 
 .dot_list li a:hover{
@@ -198,6 +198,7 @@ margin: auto;
 
 
 .add_button{
+	backround-color: red;
 	margin: auto;
 	text-align: center;
 }
@@ -209,6 +210,7 @@ margin: auto;
   color: #EBEEE0;
   font-size: 21px;
   outline: none;
+text-allign: center;
   align-items: center;
   background: #BA2953;
   cursor: pointer;
@@ -216,6 +218,8 @@ margin: auto;
   opacity: 0.6;
   transition: all 0.3s ease;
 }
+
+
 .inputField button:hover,
 .footer button:hover{
   background: #BA2953
