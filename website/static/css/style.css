@@ -20,6 +20,8 @@
   font-family: 'Poppins', sans-serif;
 }
 
+
+
 html{
 background-color: #EBEEE0;
 }	
@@ -27,14 +29,11 @@ background-color: #EBEEE0;
 
 body{
   width: 100%;
-  height: auto;
   overflow: auto;
-  background-color: #EBEEE0;
 }
 
 #wrapper{
   width: 100%;
-  height: auto;
   padding: 5%;
 }
 
