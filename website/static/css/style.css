@@ -279,6 +279,7 @@ td.pay_rate{width: 5%;}
 	justify-content: center;
 	position: relative;
 	border-radius: 15px!important;
+	background-color: #314E70;
 }
 
 .input_buttons{
