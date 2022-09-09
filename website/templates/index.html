@@ -38,7 +38,7 @@
                            {% if contract.id in invoiced_contracts%}
                                <td class="b"><a href= "{{ url_for('views.download_invoice', id= contract.id) }}" class="btn btn-primary submitSignUp" style="background-color: #35D5D0;"><i class="fa-solid fa-cloud-arrow-down" ></i></a></td>
                            {% else %}
-                               <td class="b" style="opacity: 50%;"><a href= "{{ url_for('views.download_invoice', id= contract.id) }}" class="btn btn-primary submitSignUp" style="background-color: #35D5D0 ;pointer-events: none;"><i class="fa-solid fa-cloud-arrow-down" ></i></a></td>
+                               <td class="b" style="opacity: 50%;"><a href= "{{ url_for('views.download_invoice', id= contract.id) }}" class="btn btn-primary submitSignUp" style="background-color: #BA2953 ;pointer-events: none;"><i class="fa-solid fa-cloud-arrow-down" ></i></a></td>
                            {% endif %}
                           </div>
                     </tr>
