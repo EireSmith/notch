@@ -24,7 +24,7 @@ body,
 #wrapper { 
   width: 100vw;
   min-height: 100vh;
-  height: auto;
+  height: 100%;	
   background-color: #EBEEE0;
 }
 
