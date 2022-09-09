@@ -19,10 +19,6 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
-::selection{
-  color: #ffff;
-  background: rgb(142, 73, 232);
-}
 
 html{
 background-color: #EBEEE0;
