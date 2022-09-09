@@ -36,9 +36,9 @@
                             <td class="b"><a class="btn btn-primary submitSignUp" onClick="updateContract({{contract.id}})"><i class="fa fa-pencil"></i></a></td>
                             <td class="b"><a href="/upload?id={{contract.id}}" class="btn btn-primary submitSignUp"><i class="fa-solid fa-cloud-arrow-up"></i></a></td>
                            {% if contract.id in invoiced_contracts%}
-                               <td class="b"><a href= "{{ url_for('views.download_invoice', id= contract.id) }}" class="btn btn-primary submitSignUp"><i class="fa-solid fa-cloud-arrow-down" ></i></a></td>
+                               <td class="b"><a href= "{{ url_for('views.download_invoice', id= contract.id) }}" class="btn btn-primary submitSignUp" style="background-color: #35D5D0;"><i class="fa-solid fa-cloud-arrow-down" ></i></a></td>
                            {% else %}
-                               <td class="b" style="opacity: 50%;"><a href= "{{ url_for('views.download_invoice', id= contract.id) }}" class="btn btn-primary submitSignUp" style="background-color: red;pointer-events: none;"><i class="fa-solid fa-cloud-arrow-down" ></i></a></td>
+                               <td class="b" style="opacity: 50%;"><a href= "{{ url_for('views.download_invoice', id= contract.id) }}" class="btn btn-primary submitSignUp" style="background-color: #35D5D0 ;pointer-events: none;"><i class="fa-solid fa-cloud-arrow-down" ></i></a></td>
                            {% endif %}
                           </div>
                     </tr>
