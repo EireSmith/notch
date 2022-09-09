@@ -334,9 +334,6 @@ float: left;
 
 /* invoices.html */
 
-.invioice_grid{
-position: relative;
-}
 .invoice_cell{
   text-align: center;
   margin: 10px;
