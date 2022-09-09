@@ -73,7 +73,7 @@ body{
 .topnav a.icon {
   border-radius: 50px;
   margin: auto;
-  background: black;
+  background: #35D5D0;
   position: relative;
 }
 
@@ -334,6 +334,10 @@ float: left;
 }
 
 /* invoices.html */
+
+.invioice_grid{
+position: relative;
+}
 .invoice_cell{
   text-align: center;
   margin: 10px;
