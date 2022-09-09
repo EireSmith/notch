@@ -19,6 +19,13 @@
   font-family: 'Poppins', sans-serif;
 }
 
+html, 
+body, 
+#wrapper { 
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #EBEEE0;
+}
 
 
 body{
@@ -29,7 +36,6 @@ body{
 #wrapper{
   width: 100%;
   padding: 5%;
-  background-color: #EBEEE0;
 	
 }
 
