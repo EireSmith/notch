@@ -8,6 +8,6 @@ if __name__ == '__main__': #run web server
 
 
 
-#run this doc in virtenv 'source virt/scripts/activate
+#run this doc in virtenv 'source venv/scripts/activate'
 #export FLASK_ENV=development 
 #export FLASK_APP=app.py

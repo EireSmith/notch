@@ -16,7 +16,7 @@ def login():
 
         if user: 
             if check_password_hash(user.password, password):
-                flash("loggded in", category = "success")
+                flash("logged in", category = "success")
                 login_user(user, remember=True) #flask will remember user is logged in after system restart/disconnect
                 return redirect(url_for("views.index")) 
             else:
