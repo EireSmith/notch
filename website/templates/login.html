@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}login{% endblock %}
-{% block content %}
 
+{% block content %}
 <form method = "POST">
     <h3 align="center">login</h3>
     <div class="inputField">
@@ -14,4 +14,5 @@
 
 </form>
 {% endblock %}
-
+{% block home_background %}<img src="{{ url_for('static', filename='images/home_background.png') }}" alt="home_background" id="home_background" />
+{% endblock %}
