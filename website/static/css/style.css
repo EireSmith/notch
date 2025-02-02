@@ -19,15 +19,26 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 
+
 }
 ::selection{
   color: #ffff;
   background: rgb(142, 73, 232);
 }
 
+
+
+#wrapper{
+  width: 100%;
+	height: 200vh;
+  padding: 5%;
+  background-color: transparent;
+
+}
+
 /* style background image on homescreen */
 #home_background{
-  position: absolute;
+  position: fixed;
   z-index: -1;
   top: 0;
   left: 0;
@@ -36,19 +47,9 @@
 }
 
 
-#wrapper{
-  width: 100%;
-	height: 100%;
-  position: fixed;
-  padding: 5%;
-  background-color: antiquewhite;
-  overflow: hidden;
-}
-
-
 /* Style the navigation menu */
 .topnav {
-  position: relative;
+  position: fixed;
   float: left;
   margin: auto;
   text-align: center;
@@ -92,11 +93,18 @@
   color: #EBEEE0;
 }
 
+#welcomeLogo{
+  padding-top: 30vh;
+  padding-right: 8vh;
+  text-align: center;
+}
 
 .main{
   margin:auto;
-  margin-top: 10%;
-  width: 1000px; 
+  margin-top: 100vh;
+  width: 1000px;
+  height: auto;
+
 }
 
 
@@ -138,15 +146,15 @@
 }
 
 #main_container{
-padding: 2%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 2%;
   background: #EDAEC0;
   margin: auto;
   margin-top: 0px;
   width: 100%; 	
   border-radius: 20px;
-  box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
-  overflow: hidden;
-
 }
 
 #main_container .inputField{
@@ -163,8 +171,13 @@ margin: auto;
 width:100%;
 }
 
+#login-sign-up-form{
+background-color: red;
+}
 
-
+#sign-up-form{
+  background-color: green;
+}
 inputField {
 	width: 100%;
 	}

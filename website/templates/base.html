@@ -20,13 +20,14 @@
                     <a id="logout" href="/logout"><i class="fa fa-power-off" aria-hidden="true"></i></a>
                 {% else %}
                    <a id="login" href="/login"><i class="fa fa-power-off" aria-hidden="true"></i></a>
-                   <a id="signup" href="/signup"><i class="fa fa-user-o" aria-hidden="true"></i></a>
                 {% endif %}
                 </div>
 
             </div>
 
+            {% block welcome %} 
 
+            {% endblock %} 
             <div class = "main">
                 {% block home_nav %}
                 {% endblock %}   

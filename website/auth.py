@@ -64,4 +64,4 @@ def signup():
 
             return redirect(url_for("views.index"))
           
-    return render_template('signup.html', user = current_user )
+    return render_template('login.html', user = current_user )

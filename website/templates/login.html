@@ -1,18 +1,27 @@
 {% extends "base.html" %}
 {% block title %}login{% endblock %}
+{% block welcome %}
+<div id="welcomeLogo">
+    <h1>notch</h1>
+</div>
+{% endblock %} 
 
 {% block content %}
-<form method = "POST">
-    <h3 align="center">login</h3>
-    <div class="inputField">
-        <input style="font-size: 15px" name="email" id="email" type="email" placeholder="email">
-        <input style="font-size: 15px" name="password" id="password" type="password" placeholder="password">     
-    </div>
-    <br />
-    <button type="submit" class="submit">Login</button>
-
-
-</form>
+<div id="login-sign-up-form">
+    <form method = "POST">
+        <h3 align="center">login</h3>
+        <div class="inputField">
+            <input style="font-size: 15px" name="email" id="email" type="email" placeholder="email">
+            <input style="font-size: 15px" name="password" id="password" type="password" placeholder="password">     
+        </div>
+        <br />
+        <button type="submit" class="submit">Login</button>
+    </form>
+    <button id="signup" onclick="changeDivContent(this)">Sign Up</button>
+</div>
 {% endblock %}
+
 {% block home_background %}<img src="{{ url_for('static', filename='images/home_background.png') }}" alt="home_background" id="home_background" />
 {% endblock %}
+
+
