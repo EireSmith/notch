@@ -46,7 +46,9 @@
   height: 100%;
 }
 
-
+.nav{
+  flex: 0 0 100%;
+}
 /* Style the navigation menu */
 .topnav {
   position: fixed;
@@ -93,17 +95,21 @@
   color: #EBEEE0;
 }
 
-#welcomeLogo{
+#landContainer{
   padding-top: 30vh;
   padding-right: 8vh;
   text-align: center;
 }
-
+#landing-logo{
+  display: block;
+}
 .main{
   margin:auto;
   margin-top: 100vh;
   width: 1000px;
   height: auto;
+  display: flex;
+  flex-wrap: wrap;
 
 }
 
@@ -146,7 +152,7 @@
 }
 
 #main_container{
-  display: flex;
+  flex-direction: column ;
   flex-wrap: wrap;
   justify-content: flex-start;
   padding: 2%;
@@ -171,13 +177,6 @@ margin: auto;
 width:100%;
 }
 
-#login-sign-up-form{
-background-color: red;
-}
-
-#sign-up-form{
-  background-color: green;
-}
 inputField {
 	width: 100%;
 	}

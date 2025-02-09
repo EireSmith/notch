@@ -82,4 +82,3 @@ function changeDivContent(btn) {
   </div>`;
 
 }
-
