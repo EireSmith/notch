@@ -1,27 +1,43 @@
 {% extends "base.html" %}
+{% block scripts %}
+    <script>
+        //fade in the logo
+        $(function() {
+        $("#landing-logo").hide().fadeIn(1000);});
+    </script>
+    <script>
+        //scroll to login form
+        document.addEventListener("DOMContentLoaded", function() {
+        setTimeout(function() {
+        var scrollTo = document.getElementById("login-sign-up-form");
+        scrollTo.scrollIntoView({  behavior: 'smooth' });
+        }, 1000);
+        });
+    </script>
+{% endblock %}
 {% block title %}login{% endblock %}
+
 {% block welcome %}
-<div id="landContainer">
-    <h1 id="landing-logo">notch</h1>
-</div>
+    <div id="landContainer">
+        <h1 id="landing-logo" style="font-size: 70px;">notch</h1>
+    </div>
 {% endblock %} 
 
 {% block content %}
-<div id="login-sign-up-form">
-    <form action="login" method = "POST">
-        <h3 align="center">login</h3>
-        <div class="inputField">
-            <input style="font-size: 15px" name="email" id="email" type="email" placeholder="email">
-            <input style="font-size: 15px" name="password" id="password" type="password" placeholder="password">     
-        </div>
-        <br />
-        <button type="submit" class="submit">Login</button>
-    </form>
-    <button id="signup" onclick="changeDivContent(this)">Sign Up</button>
-</div>
+    <div id="login-sign-up-form">
+        <form action="login" method = "POST">
+            <h3 align="center">login</h3>
+            <div class="inputField">
+                <input style="font-size: 15px" name="email" id="email" type="email" placeholder="email">
+                <input style="font-size: 15px" name="password" id="password" type="password" placeholder="password">     
+            </div>
+            <br />
+            <button type="submit" class="submit">Login</button>
+        </form>
+        <button id="signup" onclick="changeDivContent(this)">Sign Up</button>
+    </div>
 {% endblock %}
 
 {% block home_background %}<img src="{{ url_for('static', filename='images/home_background.png') }}" alt="home_background" id="home_background" />
 {% endblock %}
-
 

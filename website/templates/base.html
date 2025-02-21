@@ -8,20 +8,16 @@
             integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" 
             integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" 
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <script src="https://use.fontawesome.com/a0afcbe89c.js"></script>
+            crossorigin="anonymous" referrerpolicy="no-referrer" />     
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script>
-            //fade in the logo
-            $(function() {
-            $("#landing-logo").hide().fadeIn(1000);});
-        </script>
-
+        {% block scripts %}
+        {% endblock %}
     </head>
+
     <body>
-
-
+        {% block wrapper %}
         <div id="wrapper">
+        {% endblock %}
 
             <div class="topnav">
                 <a href="/" class="icon" >{{ first_name_init|lower|trim + family_name_init|lower|trim }}</a>
@@ -32,20 +28,19 @@
                    <a id="login" href="/login"><i class="fa fa-power-off" aria-hidden="true"></i></a>
                 {% endif %}
                 </div>
-
             </div>
-
             {% block welcome %} 
-
             {% endblock %} 
+
+            {% block main %}
             <div class = "main">
+            {% endblock %}
+
                 {% block home_nav %}
-                {% endblock %}   
-                        
+                {% endblock %}      
                 <div id="main_container">
                     {% block content %}
-                    {% endblock %}
-                    
+                    {% endblock %} 
                     {% with messages = get_flashed_messages(with_categories=true) %}
                     {% if messages %} 
                         {% for category,  message in messages %}
@@ -67,32 +62,26 @@
                         {% endfor %}
                     {% endif %}
                     {% endwith %}
-
                 </div> 
                 {% block avrg %}
                 {% endblock %}
             </div>
+
             {% block home_background %}
             {% endblock %}
         </div>
 
 
-      <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"
-      ></script>
-      <script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"
-      ></script>
-  
-      <script
-        type="text/javascript"
-        src="{{ url_for('static', filename='js/script.js') }}"
-      ></script>
-      
+
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous">
+        </script>      
+        <script
+            type="text/javascript"
+            src="{{ url_for('static', filename='js/script.js') }}">
+        </script>
 
     </body>
 </html>

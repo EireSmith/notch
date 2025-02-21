@@ -35,6 +35,7 @@ document.getElementById("start").addEventListener("change", function() {
 
 //show notches
 function showContracts() { document.getElementById("table").style="dispaly:block;"
+  
 };
 
 //hide notches

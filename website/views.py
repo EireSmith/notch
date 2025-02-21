@@ -11,7 +11,7 @@ from werkzeug.utils import secure_filename
 
 views = Blueprint('views', __name__)
 allowed_file_ext = ["DOC", "DOX", "PDF", "JPEG", "JPG","PNG", "XLSX", "XLS"]
-max_filesize = 1000000
+max_filesize = 1000000 #1mb
 
 def allowed_file(filename):
   if not "." in filename:

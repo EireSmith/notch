@@ -1,23 +1,10 @@
-@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-@font-face {
-	font-weight: normal;
-	font-style: normal;
-	font-family: 'codropsicons';
-	src:url('../fonts/codropsicons/codropsicons.eot');
-	src:url('../fonts/codropsicons/codropsicons.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/codropsicons/codropsicons.woff') format('woff'),
-		url('../fonts/codropsicons/codropsicons.ttf') format('truetype'),
-		url('../fonts/codropsicons/codropsicons.svg#codropsicons') format('svg');
-}
-
-
+@import url('https://fonts.googleapis.com/css2?family=Solway:wght@300;400;500;700;800&display=swap');
 
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Solway', serif;
 
 
 }
@@ -29,12 +16,24 @@
 
 
 #wrapper{
-  width: 100%;
-	height: 200vh;
-  padding: 5%;
+  position: relative;
+  overflow: hidden;
+  width: 1500px;
+	height: 100vh;
+  padding: 50px;
   background-color: transparent;
 
 }
+
+#wrapper-temp{
+  position: relative;
+  width: 1500px;
+	height: 100vh;
+  padding: 50px;
+  background-color: transparent;
+
+}
+
 
 /* style background image on homescreen */
 #home_background{
@@ -71,7 +70,6 @@
   border: 5px solid #EDAEC0;
   border-radius: 50px;
   text-decoration: none;
-
   font-size: 17px;
   display: block;
 }
@@ -100,20 +98,35 @@
   padding-right: 8vh;
   text-align: center;
 }
+
 #landing-logo{
+  font-family: Solway;
   display: block;
 }
+
 .main{
   margin:auto;
-  margin-top: 100vh;
+  margin-bottom: 25vh;
+  padding-top: 100vh;
   width: 1000px;
   height: auto;
   display: flex;
   flex-wrap: wrap;
 
+
 }
 
+.main-temp{
+  position: absolute;
+  margin: auto;
+  margin-top: 50px;
+  position: relative;
+  width: 1000px;
+  height: max-content;
+  display: flex;
+  flex-wrap: wrap;
 
+}
 .internal_nav{
   height: 40px;
   width: 30%;
@@ -155,26 +168,24 @@
   flex-direction: column ;
   flex-wrap: wrap;
   justify-content: flex-start;
-  padding: 2%;
+  padding: 20px;
   background: #EDAEC0;
-  margin: auto;
-  margin-top: 0px;
   width: 100%; 	
+  height: auto;
   border-radius: 20px;
 }
 
 #main_container .inputField{
 margin: 10px 0px;
-  width: 100%;
+width: 100%;
 display: flex;
 height: 45px;
 }
   
 
-
 #home{
 margin: auto;
-width:100%;
+width: 900px;
 }
 
 inputField {
@@ -195,7 +206,7 @@ inputField {
   font-size: 17px;
   transition: all .5s ease;
   text-align: center;
-margin: auto;
+  margin: auto;
 }
 
 #pay{width: 10%;}
@@ -208,7 +219,7 @@ margin: auto;
 
 
 .add_button{
-	margin: auto;
+	margin: 9px;
 	text-align: center;
 }
 
@@ -240,9 +251,10 @@ margin: auto;
 
 
 .tab_div{
-	max-height: 500px;
+max-height: 300px;
 overflow: auto; 
-margin-bottom: 10px;}
+margin-bottom: 10px;
+}
 
 #table { width: 100%;
 	max-width: 1000px;
@@ -331,6 +343,7 @@ td.pay_rate{width: 5%;}
 .avrg{
   margin-left: auto;
   margin-right: auto;
+  height: fit-content;
   width: 40%;
   padding: auto;
   margin-top: 30px;
