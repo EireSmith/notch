@@ -23,6 +23,10 @@
     </div>
 {% endblock %} 
 
+{% block nav %}
+{% endblock %}
+
+
 {% block content %}
     <div id="login-sign-up-form">
         <form action="login" method = "POST">
@@ -38,6 +42,4 @@
     </div>
 {% endblock %}
 
-{% block home_background %}<img src="{{ url_for('static', filename='images/home_background.png') }}" alt="home_background" id="home_background" />
-{% endblock %}
 
