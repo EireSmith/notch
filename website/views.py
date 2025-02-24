@@ -51,6 +51,7 @@ def index():
   # GETTING DATA FOR AVERAGE DAY/PAY
   contract_query = Contract.query.filter(Contract.user_id == curr_user).all()
 
+
   #populate date lists with string values
   for s in contract_query:
     s = str(s.date_start)
