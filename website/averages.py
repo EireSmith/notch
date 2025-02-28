@@ -1,7 +1,6 @@
 import pandas as pd
 
 
-
 def average_days(start, end):
         #create dataframe
         dates = pd.DataFrame({'start':start,'end':end})

@@ -14,7 +14,7 @@
         {% endblock %}
     </head>
 
-    <body>
+    <body style="background-image:url('../static/images/background_noise.jpg');background-size:cover">
         {% block wrapper %}
         <div id="wrapper">
         {% endblock %}
@@ -73,13 +73,16 @@
                     {% endif %}
                     {% endwith %}
                 </div> 
+                <div class="content_2">
+                {% block graph %}
+                {% endblock %}
                 {% block avrg %}
                 {% endblock %}
+                </div>
+
             </div>
 
-            {% block home_background %}
-            <img src="{{ url_for('static', filename='images/home_background.png') }}" alt="home_background" id="home_background" />
-            {% endblock %}
+
         </div>
 
         <script

@@ -1,5 +1,10 @@
  {% extends "base.html" %}
- 
+ {% block scripts %}
+ <script src="https://code.highcharts.com/highcharts.js"></script>
+ <script src="https://code.highcharts.com/modules/sankey.js"></script>
+ <script src="https://code.highcharts.com/modules/arc-diagram.js"></script>
+ <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+ {% endblock %}
  {% block title %} {{ first_name|lower|trim }}'s notches{% endblock %}
 
  {% block wrapper %}
@@ -56,7 +61,11 @@
        </div>
     </div>
 {% endblock %}
-
+{% block graph %}
+ <div class="graph">
+    <div class="chart" id="chart"></div>
+</div>
+{% endblock %}
 {% block avrg %}
 <div class="avrg">
     <div class="day_avrg">

@@ -103,7 +103,7 @@
 .main{
   margin:auto;
   margin-bottom: 25vh;
-  padding-top: 100vh;
+  padding-top: 0;
   width: 1000px;
   height: auto;
   display: flex;
@@ -123,6 +123,27 @@
   flex-wrap: wrap;
 
 }
+
+.content_2 {
+  margin: auto;
+  position: relative;
+  background-color: #d53588;
+  width: 1000px;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+.graph{
+ 
+  background-color: #EDAEC0;
+  width: 800px;
+  border: solid;
+  border-color: #314E70;
+  border-width: 4px;
+  padding: 15px;
+
+}
+
 .internal_nav{
   height: 40px;
   width: 30%;
@@ -331,34 +352,27 @@ td.pay_rate{width: 5%;}
 
 
 .avrg{
-  margin-left: auto;
-  margin-right: auto;
-  height: fit-content;
-  width: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: auto;
   padding: auto;
   margin-top: 30px;
 	margin-bottom: 20px;
-  text-align: center;
+  border-width: 4px;
+  border: solid;
 }
 
 .day_avrg , .pay_avrg{
-  background-color: #35D5D0;
-  width: 150px;
-  height: 15%;
-  padding: 20%;
+  display: flex;
+  flex-direction: column;
+  background-color: #EDAEC0;
   text-align: center;
-  padding: 25px;
-  border-radius: 20px;
-  box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
+  padding-left: 5px;
+  padding-right: 5px;
+
 } 
-.day_avrg{
-float: left;
 
-}
-
-.pay_avrg{
-  float: right;
-}
 
 /* invoices.html */
 

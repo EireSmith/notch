@@ -40,19 +40,18 @@ def allowed_filesize(filesize):
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def index():
-  #declare empty lists to hold dates to compare
-  start_dates_list=[]
-  end_dates_list=[]
 
   #get data from current user
   curr_user = current_user.id
-  # CHECKING IF INVOICE EXISTS
-  
-  # GETTING DATA FOR AVERAGE DAY/PAY
   contract_query = Contract.query.filter(Contract.user_id == curr_user).all()
 
 
-  #populate date lists with string values
+  #declare empty lists to hold dates to compare
+  start_dates_list=[]
+  end_dates_list=[]
+  contract_id_list=[]
+
+  #populate lists from query
   for s in contract_query:
     s = str(s.date_start)
     start_dates_list.append(s)
@@ -60,15 +59,25 @@ def index():
   for e in contract_query:
     e = str(e.date_end)
     end_dates_list.append(e)
-  
+
+  for i in contract_query:
+    i = str(i.id)
+    contract_id_list.append(i)
+
+
+  #show average days
   int_average_days = average_days(start_dates_list, end_dates_list)
 
+  #show average pay rate
   rates = []
   for r in contract_query:
     r = int(r.pay_rate)
     rates.append(r)
 
   int_average_pay = average_pay(rates)
+
+  #call function from chart.py to get graph datarame
+  #get_graph(contract_id_list, start_dates_list, end_dates_list)
 
   # VALIDATING FORM DATA FOR DB SUBMISSION
   if request.method == 'POST':
@@ -178,9 +187,9 @@ def upload_invoice():
         return redirect(url_for("views.index"))
 
 
-      #  takes file from submit form
+      # takes file from submit form
       file = request.files["file"]
-     # takes in contract_id  from URL
+      # takes in contract_id  from URL
       contract_id = request.args.get('id')
       user_contracts = Contract.query.with_entities(Contract.id).filter(Contract.user_id == current_user.id).all()
 
