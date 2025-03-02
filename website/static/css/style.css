@@ -135,7 +135,7 @@
 }
 .graph{
  
-  background-color: #EDAEC0;
+  background-color: transparent;
   width: 800px;
   border: solid;
   border-color: #314E70;
@@ -144,6 +144,12 @@
 
 }
 
+.chart {
+  height: 300px;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: transparent;
+}
 .internal_nav{
   height: 40px;
   width: 30%;

@@ -7,6 +7,7 @@ from . import db
 import datetime
 import json
 from .averages import average_days, average_pay
+from .chart import graph_structure
 from werkzeug.utils import secure_filename
 
 views = Blueprint('views', __name__)
@@ -49,7 +50,7 @@ def index():
   #declare empty lists to hold dates to compare
   start_dates_list=[]
   end_dates_list=[]
-  contract_id_list=[]
+  contract_name_list=[]
 
   #populate lists from query
   for s in contract_query:
@@ -61,12 +62,11 @@ def index():
     end_dates_list.append(e)
 
   for i in contract_query:
-    i = str(i.id)
-    contract_id_list.append(i)
+    i = str(i.job_title)
+    contract_name_list.append(i)
 
-
-  #show average days
-  int_average_days = average_days(start_dates_list, end_dates_list)
+  #call function to populate graph list
+  graph_data = graph_structure(start_dates_list,contract_name_list)
 
   #show average pay rate
   rates = []
@@ -74,10 +74,11 @@ def index():
     r = int(r.pay_rate)
     rates.append(r)
 
+  #get averages
+  int_average_days = average_days(start_dates_list, end_dates_list)
   int_average_pay = average_pay(rates)
 
-  #call function from chart.py to get graph datarame
-  #get_graph(contract_id_list, start_dates_list, end_dates_list)
+
 
   # VALIDATING FORM DATA FOR DB SUBMISSION
   if request.method == 'POST':
@@ -110,7 +111,7 @@ def index():
   first_name= current_user.first_name
   first_name_init =list(first_name)[0]
   family_name_init = list(current_user.family_name)[0]
-  return render_template("index.html", invoiced_contracts = invoiced_contracts, contract_query = contract_query, user = current_user, first_name = first_name, first_name_init = first_name_init, family_name_init = family_name_init, average_days = int_average_days, average_pay = int_average_pay)
+  return render_template("index.html", graph_data = graph_data, invoiced_contracts = invoiced_contracts, contract_query = contract_query, user = current_user, first_name = first_name, first_name_init = first_name_init, family_name_init = family_name_init, average_days = int_average_days, average_pay = int_average_pay)
 
 
 

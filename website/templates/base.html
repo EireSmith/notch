@@ -94,5 +94,7 @@
             type="text/javascript"
             src="{{ url_for('static', filename='js/script.js') }}">
         </script>
+        {% block end_scripts %}
+        {% endblock %}
     </body>
 </html>
