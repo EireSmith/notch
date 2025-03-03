@@ -125,23 +125,23 @@
 }
 
 .content_2 {
-  margin: auto;
+  margin-top: 20px;
+
   position: relative;
-  background-color: #d53588;
   width: 1000px;
   height: auto;
   display: flex;
   flex-wrap: wrap;
+
 }
 .graph{
- 
-  background-color: transparent;
+  background-color: whitesmoke;
   width: 800px;
   border: solid;
   border-color: #314E70;
   border-width: 4px;
   padding: 15px;
-
+  gap: 5%;
 }
 
 .chart {
@@ -269,6 +269,7 @@ inputField {
 
 .tab_div{
 max-height: 300px;
+width: auto;
 overflow: auto; 
 margin-bottom: 10px;
 }
@@ -308,6 +309,11 @@ td.date_end{
 
 td.pay_rate{width: 5%;}
 
+.notch_view{
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 5px;
+}
 .notch_view a {
 	height: 30px;
 	width: 30px;
@@ -367,6 +373,7 @@ td.pay_rate{width: 5%;}
 	margin-bottom: 20px;
   border-width: 4px;
   border: solid;
+  background-color: whitesmoke
 }
 
 .day_avrg , .pay_avrg{
