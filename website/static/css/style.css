@@ -108,8 +108,7 @@
   height: auto;
   display: flex;
   flex-wrap: wrap;
-
-
+  flex-direction: column;
 }
 
 .main-temp{
@@ -121,27 +120,27 @@
   height: max-content;
   display: flex;
   flex-wrap: wrap;
-
+  flex-direction: column
 }
 
 .content_2 {
-  margin-top: 20px;
 
+  margin-top: 20px;
   position: relative;
   width: 1000px;
-  height: auto;
+  max-height: 300px;
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 20%;
 
 }
 .graph{
+  border-radius: 20px;
   background-color: whitesmoke;
   width: 800px;
-  border: solid;
-  border-color: #314E70;
-  border-width: 4px;
   padding: 15px;
   gap: 5%;
+
 }
 
 .chart {
@@ -275,44 +274,50 @@ margin-bottom: 10px;
 }
 
 #table { width: 100%;
+
 	max-width: 1000px;
 border-collapse:separate;
 border-spacing:10px 10px;}
 
-table td:not(.b){
-
-	white-space: nowrap;
-	height: 45px;
-	border-radius: 20px;
-	outline: none;
-	font-size: 17px;
-	background-color: #EBEEE0;
-	text-align: center;
-	padding: 5px;
+table {
+  width: 100%;
+  max-width: 1000px;
+  border-collapse: separate;
+  border-spacing: 10px 10px;
+  table-layout: fixed; 
 }
 
-td.job_title{
-	overflow-x: auto;
-	overflow-y: hidden;
-	width: 30%;
-	max-width: 300px;
-
+table td:not(.b) {
+  width: 20%; 
+  white-space: nowrap;
+  height: 45px;
+  border-radius: 20px;
+  outline: none;
+  font-size: 17px;
+  background-color: #EBEEE0;
+  text-align: center;
+  padding: 5px;
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
 }
 
-td.date_start{
-	width: 15%;
+td.job_title {
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 30%;
+  max-width: 300px;
 }
 
-td.date_end{
-	width: 15%;
+td.date_start, td.date_end, td.pay_rate {
+  width: 15%;
 }
-
-td.pay_rate{width: 5%;}
-
 .notch_view{
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   margin-bottom: 5px;
+  gap: 10px; 
+
 }
 .notch_view a {
 	height: 30px;
@@ -325,6 +330,7 @@ td.pay_rate{width: 5%;}
 	border-radius: 15px!important;
 	background-color: #314E70;
 }
+
 
 .input_buttons{
 	width: auto;
@@ -364,19 +370,21 @@ td.pay_rate{width: 5%;}
 
 
 .avrg{
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  margin: auto;
-  padding: auto;
-  margin-top: 30px;
-	margin-bottom: 20px;
+  height: fit-content;
+  /* margin: auto; */
+  padding-top: 5%;
+  /* margin-top: auto; */
   border-width: 4px;
   border: solid;
-  background-color: whitesmoke
+  background-color: whitesmoke;
 }
 
 .day_avrg , .pay_avrg{
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
   background-color: #EDAEC0;

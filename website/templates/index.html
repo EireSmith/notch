@@ -1,128 +1,127 @@
- {% extends "base.html" %}
- {% block scripts %}
- <script src="https://code.highcharts.com/highcharts.js"></script>
- <script src="https://code.highcharts.com/modules/timeline.js"></script>
- <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+{% extends "base.html" %}
 
- {% endblock %}
- {% block title %} {{ first_name|lower|trim }}'s notches{% endblock %}
-
- {% block wrapper %}
- <div id="wrapper-temp">
- {% endblock %}
-
- {% block home_nav %}
- {% endblock %}
-
- {% block main %}
- <div class = "main-temp">
- {% endblock %}
-
- {% block content %}
-    <div id="home" >
-        <form class="inputField" method="POST"> 
-         <div class="input_group">
-            <input style="font-size: 15px" name ="job" id="job" type="text" placeholder="notch title">
-            <input style="font-size: 15px"  name ="start"id="start" type="date" placeholder="start">
-            <input style="font-size: 15px" name ="end" id="end" type="date"  placeholder="end">
-            <input style="font-size: 15px" name ="pay" id="pay" type="number" min="0" step="any" placeholder="rate">
-         </div>
-         <div class="add_button">
-            <button ><i type="submit" class="fa fa-plus"></i></button>
-         </div>
-        </form>
-        <div class =tab_div>
-            <table id='table' >
-                    {% for contract in contract_query |sort(attribute='date_added') %}
-                    <tr class="notch_view">
-                         <td class="job_title">{{contract.job_title}}</td>
-                         <td class="date_start">{{contract.date_start}}</td>
-                         <td class="date_end">{{contract.date_end}}</td>
-                         <td class="pay_rate">{{contract.pay_rate}}</td>
-                          <div class="input_buttons">
-                            <td class="b"><a class="btn btn-primary submitSignUp" onClick="deleteContract({{contract.id}})"><i class="fa fa-ban"></i></a></td>
-                            <td class="b"><a class="btn btn-primary submitSignUp" onClick="updateContract({{contract.id}})"><i class="fa fa-pencil"></i></a></td>
-                            <td class="b"><a href="/upload?id={{contract.id}}" class="btn btn-primary submitSignUp"><i class="fa-solid fa-cloud-arrow-up"></i></a></td>
-                           {% if contract.id in invoiced_contracts%}
-                               <td class="b"><a href= "{{ url_for('views.download_invoice', id= contract.id) }}" class="btn btn-primary submitSignUp" style="background-color: #35D5D0;"><i class="fa-solid fa-cloud-arrow-down" ></i></a></td>
-                           {% else %}
-                               <td class="b" style="opacity: 50%;"><a href= "{{ url_for('views.download_invoice', id= contract.id) }}" class="btn btn-primary submitSignUp" style="background-color: #BA2953 ;pointer-events: none;"><i class="fa-solid fa-cloud-arrow-down" ></i></a></td>
-                           {% endif %}
-                          </div>
-                    </tr>              
-                    {% endfor %}
-            </table>
-        </div>
-    </div>
-    <div class ='footer'>
-     	<div class = "button_div">
-         <button class="showbtn" onClick="showContracts()"><i class="fa fa-chevron-down"></i></button>
-         <button class="clearbtn" onClick="hideContracts()" ><i class="fa fa-chevron-up"></i></button>
-       </div>
-    </div>
+{% block scripts %}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/timeline.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
 {% endblock %}
+
+{% block title %} {{ first_name|lower|trim }}'s notches{% endblock %}
+
+{% block wrapper %}
+<div id="wrapper-temp">
+{% endblock %}
+
+{% block main_content %}
+<div class="main-temp">
+{% endblock %}
+
+{% block content %}
+<div id="home">
+    <form class="inputField" method="POST">
+        <div class="input_group">
+            <input style="font-size: 15px" name="job" id="job" type="text" placeholder="notch title">
+            <input style="font-size: 15px" name="start" id="start" type="date" placeholder="start">
+            <input style="font-size: 15px" name="end" id="end" type="date" placeholder="end">
+            <input style="font-size: 15px" name="pay" id="pay" type="number" min="0" step="any" placeholder="rate">
+        </div>
+        <div class="add_button">
+            <button><i type="submit" class="fa fa-plus"></i></button>
+        </div>
+    </form>
+    <div class="tab_div">
+        <table id="table">
+            {% for contract in contract_query |sort(attribute='date_added') %}
+            <tr class="notch_view">
+                <td class="job_title">{{contract.job_title}}</td>
+                <td class="date_start">{{contract.date_start}}</td>
+                <td class="date_end">{{contract.date_end}}</td>
+                <td class="pay_rate">{{contract.pay_rate}}</td>
+                <div class="input_buttons">
+                    <td class="b"><a class="btn btn-primary submitSignUp" onClick="deleteContract({{contract.id}})"><i class="fa fa-ban"></i></a></td>
+                    <td class="b"><a class="btn btn-primary submitSignUp" onClick="updateContract({{contract.id}})"><i class="fa fa-pencil"></i></a></td>
+                    <td class="b"><a href="/upload?id={{contract.id}}" class="btn btn-primary submitSignUp"><i class="fa-solid fa-cloud-arrow-up"></i></a></td>
+                    {% if contract.id in invoiced_contracts %}
+                    <td class="b"><a href="{{ url_for('views.download_invoice', id= contract.id) }}" class="btn btn-primary submitSignUp" style="background-color: #35D5D0;"><i class="fa-solid fa-cloud-arrow-down"></i></a></td>
+                    {% else %}
+                    <td class="b" style="opacity: 50%;"><a href="{{ url_for('views.download_invoice', id= contract.id) }}" class="btn btn-primary submitSignUp" style="background-color: #BA2953; pointer-events: none;"><i class="fa-solid fa-cloud-arrow-down"></i></a></td>
+                    {% endif %}
+                </div>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+<div class="footer">
+    <div class="button_div">
+        <button class="showbtn" onClick="showContracts()"><i class="fa fa-chevron-down"></i></button>
+        <button class="clearbtn" onClick="hideContracts()"><i class="fa fa-chevron-up"></i></button>
+    </div>
+</div>
+{% endblock %}
+
 {% block graph %}
- <div class="graph">
+<div class="graph">
     <div id="chart"></div>
 </div>
 {% endblock %}
+
 {% block avrg %}
 <div class="avrg">
     <div class="day_avrg">
         <h2>{{ average_days }} days</h2>
-    
     </div>
     <div class="pay_avrg">
         <h2>£{{ average_pay }}</h2>
     </div>
 </div>
 {% endblock %}
+
 {% block end_scripts %}
 <script>
     var data = {{ graph_data | safe }};
     console.log(data);
-Highcharts.chart('chart', {
-    chart: {
-        zooming: {
-            type: 'x'
+    Highcharts.chart('chart', {
+        chart: {
+            zooming: {
+                type: 'x'
+            },
+            type: 'timeline'
         },
-        type: 'timeline'
-    },
-    xAxis: {
-        type: 'datetime',
-        visible: false
-    },
-    yAxis: {
-        gridLineWidth: 1,
-        title: null,
-        labels: {
+        xAxis: {
+            type: 'datetime',
+            visible: false
+        },
+        yAxis: {
+            gridLineWidth: 1,
+            title: null,
+            labels: {
+                enabled: false
+            }
+        },
+        legend: {
             enabled: false
-        }
-    },
-    legend: {
-        enabled: false
-    },
-    title: {
-        text: 'notch timeline'
-    },
-
-    tooltip: {
-        style: {
-            width: 300
-        }
-    },
-    series: [{
-        dataLabels: {
-            allowOverlap: true,
-            format: '<span style="color:{point.color}">● </span><span ' +
-                'style="font-weight: bold;" > ' +
-                '{point.x:%d %b %Y}</span><br/>{point.label}'
         },
-        marker: {
-            symbol: 'circle'
+        title: {
+            text: 'notch timeline'
         },
-        data: data
-    }]
-});
+        tooltip: {
+            style: {
+                width: 300
+            }
+        },
+        series: [{
+            dataLabels: {
+                allowOverlap: true,
+                format: '<span style="color:{point.color}">● </span><span ' +
+                    'style="font-weight: bold;"> ' +
+                    '{point.x:%d %b %Y}</span><br/>{point.label}'
+            },
+            marker: {
+                symbol: 'circle'
+            },
+            data: data
+        }]
+    });
 </script>
 {% endblock %}
