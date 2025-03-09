@@ -1,15 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Solway:wght@300;400;500;700;800&display=swap');
 
 *{
-  font-family: 'Solway', serif;
+  font-family: "Arial", sans-serif;
+  color: #EBEEE0;
   margin: 0;
   padding: 0;
   box-sizing: border-box;  
-}
-
-::selection{
-  color: #ffff;
-  background: rgb(142, 73, 232);
+  border: none;
+  overscroll-behavior: none;
 }
 
 
@@ -62,11 +60,8 @@
 .topnav a {
   transition: all 0.1s linear;
   color: #314E70;
-  padding: 14px 16px;
-  border: 5px solid #EDAEC0;
-  border-radius: 50px;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 1em;
   display: block;
 }
 
@@ -109,6 +104,7 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+
 }
 
 .main-temp{
@@ -132,7 +128,7 @@
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 20%;
-
+  justify-content: space-evenly;
 }
 .graph{
   border-radius: 20px;
@@ -157,24 +153,30 @@
   position: fixed;
 
 }
+.nav{
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
 .dot_list {
   /* Center the content */
   align-items: center;
   display: flex;
   justify-content: center;
-
-  /* Reset styles */
   list-style-type: none;
   margin: auto;
-  padding-top: 100px;
 }
 
 
 .dot_list li a {
+  color: white;
   margin: 0 20px;
 }
 
 .dot_list li a:hover{
+  color: #BA2953;
   transition: opacity .2s ease-in-out;
   opacity: 100%;
   
@@ -185,57 +187,59 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   padding: 20px;
-  background: #EDAEC0;
+  box-shadow: #3c0e46 0px 7px 10px -6px;
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(6px);
   width: 100%; 	
   height: auto;
-  border-radius: 20px;
-}
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;}
 
-#main_container .inputField{
-margin: 10px 0px;
-width: 100%;
-display: flex;
-height: 45px;
+.inputField{
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  height: 45px;
+  flex-wrap: nowrap;
+  justify-content: center;
 }
   
 
 #home{
 margin: auto;
-width: 900px;
+width: auto;
 }
 
-inputField {
-	width: 100%;
-	}
-
 .input_group{
-	margin-left: 10px;
+  display: flex;
 	width: 90%;
 }
 
 .inputField input{
-  background-color: #EBEEE0;
+  background-color: rgb(0, 0, 0);
+  opacity: 0.2;
   height: 100%;
-  outline: none;
   border-radius: 20px;
-  border: 1px solid #99ccff;
-  font-size: 17px;
-  transition: all .5s ease;
   text-align: center;
   margin: auto;
 }
+
+
+
+.inputField input:hover{
+  opacity: 0.4;
+  transition: all 0.3s ease;
+  
+}
+
 
 #pay{width: 10%;}
 #job{width: 30%;}
 
 
-.inputField input:focus{
-  border-color: #ccffcc;
-}
-
 
 .add_button{
-	margin: 9px;
+  margin: auto;
 	text-align: center;
 }
 
@@ -248,7 +252,7 @@ inputField {
   outline: none;
   text-align: center;
   align-items: center;
-  background: #BA2953;
+  background: #AD49E1;
   cursor: pointer;
   border-radius: 15px;
   opacity: 0.6;
@@ -260,7 +264,7 @@ inputField {
 .footer button:hover{
   background: #BA2953
 }
-.inputField button.active{
+.inputField button:hover{
   opacity: 1;
   pointer-events: auto;
 }
@@ -273,68 +277,56 @@ overflow: auto;
 margin-bottom: 10px;
 }
 
-#table { width: 100%;
-
-	max-width: 1000px;
-border-collapse:separate;
-border-spacing:10px 10px;}
 
 table {
+  color: whitesmoke;
   width: 100%;
   max-width: 1000px;
   border-collapse: separate;
   border-spacing: 10px 10px;
   table-layout: fixed; 
+  
 }
+
 
 table td:not(.b) {
-  width: 20%; 
-  white-space: nowrap;
+  width: 20%;
   height: 45px;
-  border-radius: 20px;
   outline: none;
   font-size: 17px;
-  background-color: #EBEEE0;
-  text-align: center;
-  padding: 5px;
   display: flex;
-  align-items: center; 
-  justify-content: center; 
-}
-
-td.job_title {
-  overflow-x: auto;
-  overflow-y: hidden;
-  width: 30%;
-  max-width: 300px;
+  align-items: center;
+  justify-content: center;
 }
 
 td.date_start, td.date_end, td.pay_rate {
   width: 15%;
+  
 }
 .notch_view{
+  background-color: rgba(0, 0, 0, 0.2);
   display: flex;
   flex-wrap: nowrap;
   margin-bottom: 5px;
+  align-items: center;
   gap: 10px; 
 
 }
 .notch_view a {
+  border: none;
 	height: 30px;
 	width: 30px;
 	display: flex;
+
 	align-items: center;
 	text-align: center;
 	justify-content: center;
-	position: relative;
 	border-radius: 15px!important;
-	background-color: #314E70;
+	background-color: hsla(282, 80%, 14%, 0.7);
+ 
+
 }
 
-
-.input_buttons{
-	width: auto;
-}
 .footer{
 	width: 100%;
 	align-items: center;
@@ -351,43 +343,43 @@ td.date_start, td.date_end, td.pay_rate {
 .footer button{
 	padding: 6px 10px;
 	border-radius: 3px;
-	border: none;
 	outline: none;
 	color: #EBEEE0;
 	font-weight: 400;
 	font-size: 16px;
 	margin-left: 5px;
-	background: #BA2953;
+	background: #7A1CAC;
 	cursor: pointer;
-	opacity: 0.6;
-	transition: all 0.3s ease;
-}
-.footer button.active{
 	opacity: 1;
-	pointer-events: auto;
+	transition: all 0.3s ease;
 }
 
 
 
 .avrg{
   border-radius: 20px;
+  box-shadow: #3c0e46 0px 7px 10px -6px;
+  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6px);
   display: flex;
   flex-direction: column;
-  gap: 20px;
   height: fit-content;
-  /* margin: auto; */
-  padding-top: 5%;
-  /* margin-top: auto; */
-  border-width: 4px;
-  border: solid;
-  background-color: whitesmoke;
+  overflow: hidden;
 }
 
+.average-title{
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  backdrop-filter: blur(6px);
+  background-color: rgba(255, 255, 255);
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+}
 .day_avrg , .pay_avrg{
-  border-radius: 15px;
+  padding-top: 20px;
   display: flex;
   flex-direction: column;
-  background-color: #EDAEC0;
   text-align: center;
   padding-left: 5px;
   padding-right: 5px;
@@ -399,7 +391,7 @@ td.date_start, td.date_end, td.pay_rate {
 
 .invoice_cell{
 	border-radius: 5%;
- background-color: #EBEEE0;
+  background-color: #EBEEE0;
   text-align: center;
   margin: 10px;
   height: 50%;

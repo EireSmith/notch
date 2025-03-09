@@ -2,30 +2,6 @@
 
 let clearAllBtn = document.querySelector(".footer clear");
 
-/*
-function buttonActive(){ 
-  let userEnteredJob= jobInput.value 
-  let userEnteredStart= startInput.value
-  let userEnteredPay = payInput.value
-  
-  if(userEnteredJob.trim() != 0  && userEnteredStart != 0 && userEnteredPay != 0){
-    addBtn.classList.add("active"); 
-    //updBtn.classList.add("active");
-
-  } 
-  else {
-    addBtn.classList.remove("active"); 
-    //updBtn.classList.remove("active");
-  }
- };
-
-
-jobInput.addEventListener("input", buttonActive)
-startInput.addEventListener("input", buttonActive)
-payInput.addEventListener("input", buttonActive)
-*/
-
-
 //set end date after start date
 document.getElementById("start").addEventListener("change", function() {
     var start = this.value;

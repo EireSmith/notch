@@ -13,7 +13,7 @@
         {% block scripts %}{% endblock %}
     </head>
 
-    <body style="background-image:url('../static/images/background_noise.jpg'); width: 300px; height: 300px; background-size:cover">
+    <body style="background-image:url('../static/images/container_background_noise.jpg'); width: 300px; height: 300px; background-size:cover;">
         {% block wrapper %}
         <div id="wrapper">
         {% endblock %}
@@ -22,7 +22,7 @@
             <a href="/" class="icon">{{ first_name_init|lower|trim + family_name_init|lower|trim }}</a>
             <div id="myLinks" class="active">
                 {% if user.is_authenticated %}
-                    <a id="logout" href="/logout"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+                    <a id="logout" href="/logout" ><i class="fa fa-power-off" aria-hidden="true" ></i></a>
                 {% else %}
                     <a id="login" href="/login"><i class="fa fa-power-off" aria-hidden="true"></i></a>
                 {% endif %}
@@ -38,8 +38,8 @@
         {% block nav %}
         <div class="nav">
             <ul class="dot_list">
-                <li><a id="notch" class="btn btn-info" href="/">contracts</a></li>
-                <li><a id="invoices" class="btn btn-info" href="/invoices">invoices</a></li>
+                <li><a id="notch" class="fa fa-bars" href="/"></a></li>
+                <li><a id="invoices" class="fa fa-file" href="/invoices"></a></li>
             </ul>
         </div>
         {% endblock %}

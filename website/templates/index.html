@@ -36,13 +36,13 @@
                 <td class="job_title">{{contract.job_title}}</td>
                 <td class="date_start">{{contract.date_start}}</td>
                 <td class="date_end">{{contract.date_end}}</td>
-                <td class="pay_rate">{{contract.pay_rate}}</td>
+                <td class="pay_rate">€{{contract.pay_rate}}</td>
                 <div class="input_buttons">
                     <td class="b"><a class="btn btn-primary submitSignUp" onClick="deleteContract({{contract.id}})"><i class="fa fa-ban"></i></a></td>
                     <td class="b"><a class="btn btn-primary submitSignUp" onClick="updateContract({{contract.id}})"><i class="fa fa-pencil"></i></a></td>
                     <td class="b"><a href="/upload?id={{contract.id}}" class="btn btn-primary submitSignUp"><i class="fa-solid fa-cloud-arrow-up"></i></a></td>
                     {% if contract.id in invoiced_contracts %}
-                    <td class="b"><a href="{{ url_for('views.download_invoice', id= contract.id) }}" class="btn btn-primary submitSignUp" style="background-color: #35D5D0;"><i class="fa-solid fa-cloud-arrow-down"></i></a></td>
+                    <td class="b"><a href="{{ url_for('views.download_invoice', id= contract.id) }}" class="btn btn-primary submitSignUp" style="background-color: hsla(286, 75%, 77%, 0.7);"><i class="fa-solid fa-cloud-arrow-down"></i></a></td>
                     {% else %}
                     <td class="b" style="opacity: 50%;"><a href="{{ url_for('views.download_invoice', id= contract.id) }}" class="btn btn-primary submitSignUp" style="background-color: #BA2953; pointer-events: none;"><i class="fa-solid fa-cloud-arrow-down"></i></a></td>
                     {% endif %}
@@ -67,17 +67,21 @@
 {% endblock %}
 
 {% block avrg %}
-<div class="avrg">
+<div class="avrg" >
+    <div class="average-title">
+        <h2>averages</h2>
+    </div>
     <div class="day_avrg">
         <h2>{{ average_days }} days</h2>
     </div>
     <div class="pay_avrg">
-        <h2>£{{ average_pay }}</h2>
+        <h2>€{{ average_pay }}</h2>
     </div>
 </div>
 {% endblock %}
 
 {% block end_scripts %}
+<!--Highcharts timeline-->
 <script>
     var data = {{ graph_data | safe }};
     console.log(data);
@@ -103,7 +107,7 @@
             enabled: false
         },
         title: {
-            text: 'notch timeline'
+            text: ''
         },
         tooltip: {
             style: {
