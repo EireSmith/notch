@@ -135,9 +135,9 @@
   position: fixed;
 
 }
-.nav{
+#nav{
+  display: flex;
   height: 40px;
-  background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(6px);
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
@@ -335,9 +335,12 @@ td.date_start, td.date_end, td.pay_rate {
 	transition: all 0.3s ease;
 }
 
+.div-dark-top{
+  background-color: rgba(0, 0, 0, 0.7);
+}
 
-
-.avrg{
+#avrg{
+  text-align: center;
   border-radius: 20px;
   box-shadow: #3c0e46 0px 7px 10px -6px;
   background-color: rgba(0, 0, 0, 0.1);
@@ -348,14 +351,16 @@ td.date_start, td.date_end, td.pay_rate {
   overflow: hidden;
 }
 
-.average-title{
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  backdrop-filter: blur(6px);
-  background-color: rgba(255, 255, 255);
+#avrg h2{
+  margin: auto;
+  font-size: 2em;
+ 
+}
+
+#average-title{
+  margin: auto;
   text-align: center;
-  font-size: 20px;
-  font-weight: 500;
+  padding: 10px;
 }
 .day_avrg , .pay_avrg{
   padding-top: 20px;
