@@ -12,6 +12,18 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         {% block scripts %}{% endblock %}
     </head>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div id="alert" class="alert alert-{{ 'danger' if category == 'error' else 'success' }} auto-close fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true" style="color:#155724;">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
 
     <body style="background-image:url('../static/images/container_background_noise.jpg'); width: 300px; height: 300px; background-size:cover;">
         {% block wrapper %}
@@ -37,7 +49,7 @@
 
         {% block nav %}
         <div id="nav" class="div-dark-top">
-            <ul class="dot_list">
+            <ul class="dot_list" style="padding: 0;">
                 <li><a id="notch" class="fa fa-bars" href="/"></a></li>
                 <li><a id="invoices" class="fa fa-file" href="/invoices"></a></li>
             </ul>
@@ -46,18 +58,7 @@
 
         <div id="main_container">
             {% block content %}{% endblock %}
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                    {% for category, message in messages %}
-                        <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissable fade show" role="alert">
-                            {{ message }}
-                            <button type="button" class="close" data-dismiss="alert">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
+
         </div>
 
         <div class="content_2">
@@ -68,6 +69,14 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+        <script>
+            //fade out the alert
+        window.setTimeout(function() {
+            $(".auto-close").fadeTo(1000, 0).slideUp(1000, function() {
+              $(this).remove();
+            });
+          }, 2000);
+        </script>
         {% block end_scripts %}{% endblock %}
     </body>
 </html>

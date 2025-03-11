@@ -28,17 +28,21 @@
 {% endblock %}
 
 {% block content %}
-
+    <div id="login-sign-up-header" class="div-dark-top">
+        <h2>Login</h2>
+    </div>
     <div id="login-sign-up-form">
         <form action="login" method = "POST">
-            <h3 align="center">login</h3>
             <div class="inputField">
                 <input style="font-size: 15px" name="email" id="email" type="email" placeholder="email">
                 <input style="font-size: 15px" name="password" id="password" type="password" placeholder="password">     
             </div>
             <br />
+            <div id="login-sign-up-button-outer">
             <button type="submit" class="submit">Login</button>
+            <button id="signup" onclick="changeDivContent(this)">Sign Up</button>
+            </div>
         </form>
-        <button id="signup" onclick="changeDivContent(this)">Sign Up</button>
+        
     </div>
 {% endblock %}

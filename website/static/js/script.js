@@ -1,5 +1,4 @@
 
-
 let clearAllBtn = document.querySelector(".footer clear");
 
 //set end date after start date
