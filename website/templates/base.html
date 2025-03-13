@@ -25,11 +25,9 @@
     {% endif %}
     {% endwith %}
 
-    <body style="background-image:url('../static/images/container_background_noise.jpg'); width: 300px; height: 300px; background-size:cover;">
-        {% block wrapper %}
-        <div id="wrapper">
-        {% endblock %}
-        
+    <body id="body" style="background-image:url('../static/images/container_background_noise.jpg'); width: 300px; height: 300px; background-size:cover;background-attachment: fixed;">
+    <div id="wrapper">
+
         <div class="topnav">
             <a href="/" class="icon">{{ first_name_init|lower|trim + family_name_init|lower|trim }}</a>
             <div id="myLinks" class="active">
@@ -44,7 +42,7 @@
         {% block welcome %}{% endblock %}
 
         {% block main_content %}
-        <div class="main">
+        <div id="main">
         {% endblock %}
 
         {% block nav %}
@@ -58,12 +56,13 @@
 
         <div id="main_container">
             {% block content %}{% endblock %}
-
         </div>
 
         <div class="content_2">
             {% block graph %}{% endblock %}
             {% block avrg %}{% endblock %}
+        </div>
+        
         </div>
 
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 

@@ -3,16 +3,8 @@
     <script>
         //fade in the logo
         $(function() {
-        $("#landing-logo").hide().fadeIn(1000);});
-    </script>
-    <script>
-        //scroll to login form
-        document.addEventListener("DOMContentLoaded", function() {
-        setTimeout(function() {
-        var scrollTo = document.getElementById("login-sign-up-form");
-        scrollTo.scrollIntoView({  behavior: 'smooth' });
-        }, 1000);
-        });
+        $("#landing-logo").hide().fadeIn(1000);}
+        );
     </script>
 {% endblock %}
 
@@ -25,12 +17,13 @@
 {% endblock %} 
 
 {% block nav %}
+<div class = "div-dark-top">
+        <h2>Login</h2>
+</div>
 {% endblock %}
 
 {% block content %}
-    <div id="login-sign-up-header" class="div-dark-top">
-        <h2>Login</h2>
-    </div>
+
     <div id="login-sign-up-form">
         <form action="login" method = "POST">
             <div class="inputField">
@@ -45,4 +38,16 @@
         </form>
         
     </div>
+{% endblock %}
+
+{% block end_scripts %}
+<script>
+    let cont = document.getElementById("landContainer");
+    window.addEventListener("load", (event) => {cont.style.marginBottom="0%"}
+    );
+</script>
+<script>
+    document.getElementById("body").style.overflow = "hidden";
+    document.getElementById("main").style.paddingTop = "0%";
+</script>
 {% endblock %}

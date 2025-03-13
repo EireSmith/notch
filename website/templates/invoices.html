@@ -1,16 +1,12 @@
 {% extends "base.html" %}
 {% block title %}{{ first_name|lower|trim }}'s invoices{% endblock %}
 
-{% block wrapper %}
-<div id="wrapper-temp">
-{% endblock %}
-
 {% block home_nav %}
 {% endblock %}
 
 {% block main %}
-<div class = "main-temp">
 {% endblock %}
+
 {% block content %}      
     <div class="invoice_grid">
         {% for invoice in invoices %}

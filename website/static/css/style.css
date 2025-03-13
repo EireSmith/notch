@@ -1,6 +1,7 @@
 * {
 	font-family: "Arial", sans-serif;
 	color: white;
+	font-size: 16px;
 	border: none;
 	overscroll-behavior: none;
 }
@@ -21,7 +22,6 @@ a, i, button, ::placeholder {
 }
 #wrapper {
 	position: relative;
-	overflow: hidden;
 	width: 1500px;
 	height: 100vh;
 	padding: 50px;
@@ -76,36 +76,30 @@ a, i, button, ::placeholder {
 .active {
 	color: #EBEEE0;
 }
+
 #landContainer {
-	padding-top: 30vh;
-	padding-right: 8vh;
+	padding-top: 20vh;
+	position: relative;
+	width: auto;
 	text-align: center;
+    margin-bottom: 100%;
+	transition: all 1500ms;
+
 }
-#landing-logo {
-	font-family: Solway;
-	display: block;
-}
-.main {
+
+
+#main {
 	margin: auto;
-	margin-bottom: 25vh;
-	padding-top: 0;
+	padding-top: 10%;
 	width: 1000px;
 	height: auto;
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
+	transition: all 1500ms;
+
 }
-.main-temp {
-	position: absolute;
-	margin: auto;
-	margin-top: 20px;
-	position: relative;
-	width: 1000px;
-	height: max-content;
-	display: flex;
-	flex-wrap: wrap;
-	flex-direction: column
-}
+
 .content_2 {
 	margin-top: 20px;
 	position: relative;
@@ -141,8 +135,6 @@ a, i, button, ::placeholder {
 	display: flex;
 	height: 40px;
 	backdrop-filter: blur(6px);
-	border-top-left-radius: 20px;
-	border-top-right-radius: 20px;
 }
 .dot_list {
 	/* Center the content */
@@ -209,22 +201,51 @@ input:hover {
 	margin: auto;
 	text-align: center;
 }
+
 .inputField button {
-	margin: auto;
-	width: 30px;
-	height: 30px;
-	color: #EBEEE0;
-	font-size: 21px;
-	outline: none;
-	text-align: center;
-	align-items: center;
-	background: #AD49E1;
-	cursor: pointer;
-	border-radius: 15px;
-	opacity: 0.6;
-	transition: all 0.3s ease;
+    margin: auto;
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+    outline: none;
+    padding: unset;
+    text-align: center;
+    align-items: center;
+    background-color: rgb(255, 0, 238);
+    opacity: 0.5;
+    border-radius: 15px;
+	border-style: solid;
+	border-color: rgba(85, 255, 238, 0);
+	border-width: 3px;
+    position: relative;
 }
-.dot_list li a:hover, .inputField button:hover, .footer button:hover {
+
+.inputField button:hover {
+    animation: pulse 1s 1; 
+	animation-fill-mode: forwards;
+}
+
+@keyframes pulse {
+    0% {
+		border-style: solid;
+		border-color: rgba(85, 255, 238, 1);
+        box-shadow: 0 0 0 0 rgb(85, 255, 238);
+    }
+    70% {
+		opacity: 1;
+		border-color: rgba(85, 255, 238, 1);
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    }
+    100% {	
+		opacity: 1;
+		border-color: rgba(85, 255, 238, 0);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+
+    }
+}
+
+
+.dot_list li a:hover, .footer button:hover {
 	background-color: #BA2953;
 	transition: all 0.3s ease;
 	opacity: 1;
@@ -235,6 +256,7 @@ input:hover {
 	width: auto;
 	overflow: auto;
 	margin-bottom: 10px;
+
 }
 table {
 	color: whitesmoke;
@@ -259,7 +281,8 @@ td.date_start, td.date_end, td.pay_rate {
 .notch_view {
 	background-color: rgba(0, 0, 0, 0.2);
 	display: flex;
-  border-radius: 5px;
+	padding-right: 5%;
+  	border-radius: 5px;
 	flex-wrap: nowrap;
 	margin-bottom: 1%;
 	align-items: center;
@@ -296,6 +319,9 @@ td.date_start, td.date_end, td.pay_rate {
 	background: #7A1CAC;
 }
 .div-dark-top {
+	text-align: center;
+	border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 	background-color: rgba(0, 0, 0, 0.7);
 }
 #avrg {
@@ -329,11 +355,21 @@ td.date_start, td.date_end, td.pay_rate {
 /* invoices.html */
 
 .invoice_cell {
-	border-radius: 5%;
-	background-color: #EBEEE0;
+	box-shadow: #3c0e46 0px 7px 10px -6px;
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 15px;
 	text-align: center;
-	margin: 10px;
+	margin: auto;
 	height: 50%;
-	width: 20%;
+	width: 10%;
 	float: left;
+}
+.invoice_cell:hover {
+	background-color: rgba(0, 0, 0, 0.3);
+	transition: all 0.3s ease;
+}
+.invoice_grid{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
 }
