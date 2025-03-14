@@ -262,8 +262,10 @@ input:hover {
 table {
 	width: 100%;
 	max-width: 1000px;
+	transition: all 0.3s ease;
+
 }
-table td:not(.b) {
+table td {
 	width: 20%;
 	height: 45px;
 	outline: none;
@@ -281,6 +283,7 @@ tbody {
     margin-bottom: 1%;
     gap: 2%;
     justify-content: space-around;
+
 	
 }
 td.date_start, td.date_end, td.pay_rate {
