@@ -256,15 +256,12 @@ input:hover {
 	width: auto;
 	overflow: auto;
 	margin-bottom: 10px;
+	scrollbar-width: none;
 
 }
 table {
-	color: whitesmoke;
 	width: 100%;
 	max-width: 1000px;
-	border-collapse: separate;
-	border-spacing: 10px 10px;
-	table-layout: fixed;
 }
 table td:not(.b) {
 	width: 20%;
@@ -275,12 +272,25 @@ table td:not(.b) {
 	align-items: center;
 	justify-content: center;
 }
+
+tbody {
+	background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+	flex-direction: column;
+    border-radius: 5px;
+    margin-bottom: 1%;
+    gap: 2%;
+    justify-content: space-around;
+	
+}
 td.date_start, td.date_end, td.pay_rate {
 	width: 15%;
 }
 .notch_view {
+	cursor: pointer;
 	background-color: rgba(0, 0, 0, 0.2);
 	display: flex;
+	justify-content: space-around;
 	padding-right: 5%;
   	border-radius: 5px;
 	flex-wrap: nowrap;
@@ -288,17 +298,24 @@ td.date_start, td.date_end, td.pay_rate {
 	align-items: center;
 	gap: 2%;
 }
-.notch_view a {
-	border: none;
-	height: 30px;
-	width: 30px;
-	display: flex;
-	align-items: center;
-	text-align: center;
-	justify-content: center;
-	border-radius: 15px!important;
-	background-color: hsla(282, 80%, 14%, 0.7);
+
+.notch_view:hover {
+	background-color: rgba(0, 0, 0, 0.5);
+	transition: all 0.3s ease;
 }
+
+.notch_view_buttons{
+	background-color: rgba(0, 0, 0, 0.2);
+    display: none;
+	/*onclick display: flex;*/
+    padding-right: 5%;
+    border-radius: 5px;
+    margin-bottom: 1%;
+    gap: 2%;
+    justify-content: space-around;
+}
+
+
 .footer {
 	width: 100%;
 	align-items: center;

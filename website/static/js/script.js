@@ -59,3 +59,8 @@ function changeDivContent(btn) {
 
 }
 
+
+//show buttons beneath each entry
+function displayNotchViewButtons(int) {
+  document.getElementsByClassName("notch_view_buttons")[int].style="display: flex;"
+};
