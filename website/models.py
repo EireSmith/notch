@@ -5,9 +5,9 @@ from . import db
 
 #Model Classes
 class User(db.Model, UserMixin):
-  id = db.Column(db.Integer, primary_key=True)
-  email = db.Column(db.String(150), unique=True)
-  password = db.Column(db.String(150))
+  id = db.Column(db.Integer, primary_key=True, nullable=False)
+  email = db.Column(db.String(150), unique=True,nullable=False)
+  password = db.Column(db.String(150), nullable=False)
   first_name = db.Column(db.String(150))
   family_name = db.Column(db.String(150))
   date_added = db.Column(db.DateTime(timezone=True), default=func.now())
@@ -27,7 +27,7 @@ class Contract(db.Model):
 
 class Invoice(db.Model):
   id = db.Column(db.Integer, primary_key=True)
-  filename = db.Column(db.String(255))
+  filename = db.Column(db.String(255), nullable=False)
   invoice_data = db.Column(db.LargeBinary)
   date_added = db.Column(db.DateTime(timezone=True), default=func.now())
   contract_id = db.Column(db.Integer, db.ForeignKey('contract.id'))
