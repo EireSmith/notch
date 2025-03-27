@@ -8,6 +8,11 @@
 a, i, button, ::placeholder {
 	color: rgba(255, 255, 255, 1) !important;
 }
+
+li{
+	list-style-type: none;
+}
+
 #alert {
 	display: flex;
 	justify-content: space-around;
@@ -83,7 +88,7 @@ a, i, button, ::placeholder {
 	width: auto;
 	text-align: center;
     margin-bottom: 100%;
-	transition: all 1500ms;
+	transition: all 2000ms;
 
 }
 
@@ -221,7 +226,7 @@ input:hover {
 }
 
 .inputField button:hover {
-    animation: pulse 1s 1; 
+    animation: pulse 1s infinite; 
 	animation-fill-mode: forwards;
 }
 
@@ -231,14 +236,14 @@ input:hover {
 		border-color: rgba(85, 255, 238, 1);
         box-shadow: 0 0 0 0 rgb(85, 255, 238);
     }
-    70% {
+    50% {
 		opacity: 1;
 		border-color: rgba(85, 255, 238, 1);
         box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
     }
     100% {	
 		opacity: 1;
-		border-color: rgba(85, 255, 238, 0);
+	
         box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
 
     }
@@ -252,8 +257,10 @@ input:hover {
 	pointer-events: auto;
 }
 .tab_div {
+	padding-top: 5px;
 	max-height: 300px;
 	width: auto;
+	border-radius: 5px;
 	overflow: auto;
 	margin-bottom: 10px;
 	scrollbar-width: none;
@@ -290,6 +297,7 @@ td.date_start, td.date_end, td.pay_rate {
 	width: 15%;
 }
 .notch_view {
+
 	cursor: pointer;
 	background-color: rgba(0, 0, 0, 0.2);
 	display: flex;
@@ -303,13 +311,30 @@ td.date_start, td.date_end, td.pay_rate {
 }
 
 .notch_view:hover {
+	animation: pulse-table 1s 1;
 	background-color: rgba(0, 0, 0, 0.5);
 	transition: all 0.3s ease;
 }
 
+@keyframes pulse-table {
+    0% {
+
+        box-shadow: 0 0 0 0 rgb(85, 255, 238);
+    }
+    50% {
+		opacity: 1;
+        box-shadow: 0 0 0 5px rgba(85, 255, 238, 0);
+    }
+    100% {	
+		opacity: 1;
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+
+    }
+}
+
+
 .notch_view_buttons{
 	background-color: rgba(0, 0, 0, 0.2);
-    display: none;
 	/*onclick display: flex;*/
     padding-right: 5%;
     border-radius: 5px;
@@ -318,7 +343,10 @@ td.date_start, td.date_end, td.pay_rate {
     justify-content: space-around;
 }
 
-
+.btn-primary{
+	border-style: none;
+	border-width: 0;
+}
 .footer {
 	width: 100%;
 	align-items: center;

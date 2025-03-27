@@ -34,6 +34,18 @@ function updateContract(contract_id) {
 }).then((_res)=> {window.location.href = "/"})
 };
 
+
+function updateUser(user_id) {
+  var firstName = document.getElementById('first_name').value;
+  var familyName = document.getElementById('family_name').value;
+  var password = document.getElementById('password').value;
+  fetch("/update_user", {method: "POST", body: JSON.stringify({ user_id: user_id, first_name: firstName, family_name: familyName,
+    password: password})
+}).then((_res)=> {window.location.href = "/user-profile"})
+};
+
+
+
 function filesize(file){
 
   document.cookie = `filesize=${file.files[0].size}`;

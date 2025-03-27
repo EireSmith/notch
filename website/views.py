@@ -9,7 +9,7 @@ from flask import (
     redirect,
     url_for,
 )
-from .models import Contract, Invoice
+from .models import Contract, Invoice, User
 from flask_login import login_required, current_user
 from . import db
 import datetime
@@ -28,6 +28,7 @@ def index():
 
     # get data from current user
     curr_user = current_user.id
+
     contract_query = Contract.query.filter(Contract.user_id == curr_user).all()
 
     start_dates_list = []
@@ -254,3 +255,44 @@ def invoices():
         first_name_init=first_name_init,
         family_name_init=family_name_init,
     )
+
+@views.route("/user-profile", methods=["GET"])
+@login_required
+def user_profile():
+    #info to populate HTML
+    user_id = current_user.id
+    first_name = current_user.first_name.capitalize()
+    family_name = current_user.family_name.capitalize()
+
+
+    return render_template("user-profile.html", user=current_user, user_id=user_id,first_name=first_name, family_name=family_name)
+
+@views.route("/update_user", methods=["POST"])
+@login_required
+def update_user():
+
+    json_file = json.loads(request.data)  # take in data as post req
+    user_id = json_file["user_id"]
+    user = User.query.get_or_404(user_id)
+    first_name = json_file["first_name"]
+    family_name = json_file["family_name"]
+
+    if user:
+        if user.id == current_user.id:
+            if first_name == "":
+                user.first_name = user.first_name
+            else:
+                user.first_name = first_name
+
+            if family_name == "":
+                user.family_name = user.family_name
+
+            else:
+                user.family_name = family_name
+
+            db.session.commit()
+            flash("user has been updated", category="success")
+            return jsonify({}) 
+    
+    
+    return jsonify({}) 
