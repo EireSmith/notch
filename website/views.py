@@ -21,6 +21,26 @@ from werkzeug.utils import secure_filename
 
 views = Blueprint("views", __name__)
 
+def flash_message(message, category="info"):
+    flash(message, category)
+
+def safe_redirect(endpoint, **kwargs):
+    if endpoint in ["views.index", "views.invoices"]:
+        return redirect(url_for(endpoint, **kwargs))
+    flash_message("Invalid redirect.", "error")
+    return redirect(url_for("views.index"))
+
+def user_has_permission(contract_id, user_id):
+    user_contracts = Contract.query.with_entities(Contract.id).filter(Contract.user_id == user_id).all()
+    user_contract_ids = [contract[0] for contract in user_contracts]
+
+    print(f"Contract ID: {contract_id}, User Contract IDs: {user_contract_ids}")  # Debugging line
+    if int(contract_id) in user_contract_ids:
+        return True
+    else:
+        return False
+
+
 
 @views.route("/", methods=["GET", "POST"])
 @login_required
@@ -166,55 +186,40 @@ def update_contract():
 @views.route("/upload", methods=["GET", "POST"])
 @login_required
 def upload_invoice():
+        
     if request.method == "POST":
-
-        if not allowed_filesize(request.cookies.get("filesize")):
-            flash("file must be less than 1mb", category="error")
-            return redirect(url_for("views.index"))
-
-        # takes file from submit form
-        file = request.files["file"]
-        # takes in contract_id  from URL
+        file = request.files.get("file")
         contract_id = request.args.get("id")
-        user_contracts = (
-            Contract.query.with_entities(Contract.id)
-            .filter(Contract.user_id == current_user.id)
-            .all()
-        )
 
-        permission = False
-        for u in user_contracts:
-            if int(contract_id) in u:
-                permission = True
 
-        if permission == False:
-            flash("access denied", category="error")
-            return redirect(url_for("views.index"))
+        if not file or not allowed_file(file.filename):
+            flash_message("Invalid file.", "error")
+            return safe_redirect("views.index")
 
-        exists = Invoice.query.filter(
-            Invoice.contract_id == contract_id
-        ).first()  # checking if invoice exists
-        if exists:
-            flash("invoice already attached", category="error")
-            return redirect(url_for("views.index"))
+        if not user_has_permission(contract_id, current_user.id):
+            flash_message("Access denied.", "error")
+            return safe_redirect("views.index")
 
-        if not allowed_file(file.filename):
-            flash("image extension not allowed", category="error")
-            return redirect(url_for("views.index"))
 
-        else:
+        if Invoice.query.filter_by(contract_id=contract_id).first():
+            flash_message("Invoice already exists.", "error")
+            return safe_redirect("views.index")
+            
+
+        try:
             filename = secure_filename(file.filename)
-            # adds invoice to database
-            invoice = Invoice(
-                filename=filename, invoice_data=file.read(), contract_id=contract_id
-            )
+            invoice = Invoice(filename=filename, invoice_data=file.read(), contract_id=contract_id)
             db.session.add(invoice)
             db.session.commit()
-            flash("file upload successful", category="success")
+            flash_message("File uploaded successfully.", "success")
+        except Exception as e:
+            db.session.rollback()
+            flash_message("An error occurred during upload.", "error")
 
-            return redirect(url_for("views.index"))
+        return safe_redirect("views.index")
+    
+
     return render_template("upload.html", user=current_user)
-
 
 @views.route("/download/<int:id>", methods=["GET"])
 @login_required
@@ -266,33 +271,3 @@ def user_profile():
 
 
     return render_template("user-profile.html", user=current_user, user_id=user_id,first_name=first_name, family_name=family_name)
-
-@views.route("/update_user", methods=["POST"])
-@login_required
-def update_user():
-
-    json_file = json.loads(request.data)  # take in data as post req
-    user_id = json_file["user_id"]
-    user = User.query.get_or_404(user_id)
-    first_name = json_file["first_name"]
-    family_name = json_file["family_name"]
-
-    if user:
-        if user.id == current_user.id:
-            if first_name == "":
-                user.first_name = user.first_name
-            else:
-                user.first_name = first_name
-
-            if family_name == "":
-                user.family_name = user.family_name
-
-            else:
-                user.family_name = family_name
-
-            db.session.commit()
-            flash("user has been updated", category="success")
-            return jsonify({}) 
-    
-    
-    return jsonify({}) 
