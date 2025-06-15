@@ -1,7 +1,3 @@
-Here's a professional and well-structured `README.md` for your GitHub repository **"Notch"**:
-
----
-
 # Notch
 
 **Notch** is a web application built for freelance creators to efficiently track and visualize their work engagements. It provides insights into average daily pay rates, total and average days worked, and visualizes contract timelines using interactive charts.
