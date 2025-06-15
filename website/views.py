@@ -41,86 +41,83 @@ def user_has_permission(contract_id, user_id):
         return False
 
 
-
 @views.route("/", methods=["GET", "POST"])
 @login_required
 def index():
+    try:
+        curr_user = current_user.id
 
-    # get data from current user
-    curr_user = current_user.id
+        # get all contract data
+        contract_query = Contract.query.filter(Contract.user_id == curr_user).all()
 
-    contract_query = Contract.query.filter(Contract.user_id == curr_user).all()
+        # Prepare lists for graph and averages
+        start_dates_list = [str(i.date_start) for i in contract_query]
+        end_dates_list = [str(i.date_end) for i in contract_query]
+        contract_name_list = [str(i.job_title) for i in contract_query]
+        rates = [int(i.pay_rate) for i in contract_query if i.pay_rate is not None]
 
-    start_dates_list = []
-    end_dates_list = []
-    contract_name_list = []
-    rates = []
+        # Prepare graph data and averages
+        graph_data = graph_structure(start_dates_list, contract_name_list)
+        int_average_days = average_days(start_dates_list, end_dates_list)
+        int_average_pay = average_pay(rates)
 
-    # populate lists from query
-    for i in contract_query:
-        start_dates_list.append(str(i.date_start))
-        end_dates_list.append(str(i.date_end))
-        contract_name_list.append(str(i.job_title))
-        rates.append(int(i.pay_rate))
+        # Handle form submission
+        if request.method == "POST":
+            date_format = "%Y-%m-%d"
+            job = request.form.get("job", "")
+            start = request.form.get("start") or str(datetime.date.today())
+            end = request.form.get("end") or str(datetime.date.today())
+            pay = request.form.get("pay") or 0
 
-    # call function to populate graph list
-    graph_data = graph_structure(start_dates_list, contract_name_list)
+            try:
+                start_date = datetime.datetime.strptime(start, date_format)
+                end_date = datetime.datetime.strptime(end, date_format)
+                pay = int(pay)
+            except (ValueError, TypeError):
+                flash_message("Invalid input. Please check your data.", "error")
+                return redirect(url_for("views.index"))
 
-    # get averages
-    int_average_days = average_days(start_dates_list, end_dates_list)
-    int_average_pay = average_pay(rates)
+            new_contract = Contract(
+                job_title=job,
+                date_start=start_date,
+                date_end=end_date,
+                pay_rate=pay,
+                user_id=curr_user,
+            )
+            try:
+                db.session.add(new_contract)
+                db.session.commit()
+                flash_message("Notch added", "success")
+            except Exception as e:
+                db.session.rollback()
+                flash_message("Database error: could not add contract.", "error")
+            return redirect(url_for("views.index"))
 
-    # VALIDATING FORM DATA FOR DB SUBMISSION
-    if request.method == "POST":
-        date_format = "%Y-%m-%d"
-        job = request.form.get("job")
-        start = request.form.get("start")
-        end = request.form.get("end")
-        pay = request.form.get("pay")
+        # Get invoiced contracts for button styling
+        try:
+            invoiced_contracts = Invoice.get_user_invoiced_contracts(curr_user)
+        except Exception:
+            invoiced_contracts = []
 
-        if job == None:
-            job = ""
-        if start == "" or start == None:
-            start = str(datetime.date.today())
-        start = datetime.datetime.strptime(
-            start, date_format
-        )  # parsing HTML data type of string to date object
-        if end == "" or end == None:
-            end = str(datetime.date.today())
-        end = datetime.datetime.strptime(end, date_format)
-        if pay == None or pay == "":
-            pay = 0
+        first_name = current_user.first_name
+        first_name_init = first_name[0] if first_name else ""
+        family_name_init = current_user.family_name[0] if current_user.family_name else ""
 
-        # SUBMITTING FORM DATA TO DB
-        new_contract = Contract(
-            job_title=job,
-            date_start=start,
-            date_end=end,
-            pay_rate=pay,
-            user_id=current_user.id,
+        return render_template(
+            "index.html",
+            graph_data=graph_data,
+            invoiced_contracts=invoiced_contracts,
+            contract_query=contract_query,
+            user=current_user,
+            first_name=first_name,
+            first_name_init=first_name_init,
+            family_name_init=family_name_init,
+            average_days=int_average_days,
+            average_pay=int_average_pay,
         )
-        db.session.add(new_contract)
-        db.session.commit()
-        flash("notch added", category="success")
+    except Exception as e:
+        flash_message("An unexpected error occurred.", "error")
         return redirect(url_for("views.index"))
-
-    # GET INVOICED CONTRACTS TO CHANGE DOWNLAOD BUTTON STYLE
-    invoiced_contracts = Invoice.get_user_invoiced_contracts(curr_user)
-    first_name = current_user.first_name
-    first_name_init = list(first_name)[0]
-    family_name_init = list(current_user.family_name)[0]
-    return render_template(
-        "index.html",
-        graph_data=graph_data,
-        invoiced_contracts=invoiced_contracts,
-        contract_query=contract_query,
-        user=current_user,
-        first_name=first_name,
-        first_name_init=first_name_init,
-        family_name_init=family_name_init,
-        average_days=int_average_days,
-        average_pay=int_average_pay,
-    )
 
 
 @views.route("/delete_notch", methods=["POST"])
@@ -136,90 +133,92 @@ def delete_contract():
     return jsonify({})  # empty json dict
 
 
+
 @views.route("/update_notch", methods=["POST"])
 @login_required
 def update_contract():
-    # ADD DATE FORMAT VARIABLE FOR DATETIME OBJECTS
     date_format = "%Y-%m-%d"
+    try:
+        # parse JSON data
+        json_file = json.loads(request.data)
+        contract_id = json_file.get("contract_id")
+        job = json_file.get("job", "")
+        start = json_file.get("start", "")
+        end = json_file.get("end", "")
+        pay = json_file.get("pay", "")
 
-    # GET FORM DATA
-    json_file = json.loads(request.data)  # take in data as post req
-    contract_id = json_file["contract_id"]
-    contract = Contract.query.get_or_404(contract_id)
-    job = json_file["job"]
-    start = json_file["start"]
-    end = json_file["end"]
-    pay = json_file["pay"]
-
-    # VALIDATING UPDATE DATA
-    if contract:
-        if contract.user_id == current_user.id:
-            if job == "":
-                contract.job_title = contract.job_title
-            else:
-                contract.job_title = job
-
-            if start == "":
-                contract.date_start = contract.date_start
-
-            else:
-                start = datetime.datetime.strptime(start, date_format)
-                contract.date_start = start
-
-            if end == "":
-                contract.date_end = contract.date_end
-
-            else:
-                end = datetime.datetime.strptime(end, date_format)
-                contract.date_end = end
-
-            if pay == "":
-                contract.pay_rate = contract.pay_rate
-            else:
-                contract.pay_rate = pay
-
-            db.session.commit()
-            flash("notch has been Updated", category="success")
-            return jsonify({})  # empty json dict
-
-
-@views.route("/upload", methods=["GET", "POST"])
-@login_required
-def upload_invoice():
+        contract = Contract.query.get_or_404(contract_id)
+        if contract.user_id != current_user.id:
+            flash_message("Permission denied.", "error")
+            return jsonify({"error": "Permission denied"}), 403
         
-    if request.method == "POST":
-        file = request.files.get("file")
-        contract_id = request.args.get("id")
+        start_date = None
+        end_date = None
+        if start:
+            try:
+                start_date = datetime.datetime.strptime(start, date_format)
+            except ValueError:
+                flash_message("Invalid start date format.", "error")
+                return jsonify({"error": "Invalid start date"}), 400
+        if end:
+            try:
+                end_date = datetime.datetime.strptime(end, date_format)
+            except ValueError:
+                flash_message("Invalid end date format.", "error")
+                return jsonify({"error": "Invalid end date"}), 400
 
+# if both dates are provided, check order
+        if start_date and end_date:
+            if end_date < start_date:
+                flash_message("End date must be after start date.", "error")
+                return jsonify({"error": "End date must be after start date"}), 400
+        # if end is provided, compare with existing start
+        elif end_date and not start_date:
+            if contract.date_start:
+                # make sure both are datetime objects to compare sucessfully
+                contract_start = contract.date_start
+                if isinstance(contract_start, datetime.date) and not isinstance(contract_start, datetime.datetime):
+                    contract_start = datetime.datetime.combine(contract_start, datetime.time.min)
+                if end_date < contract_start:
+                    flash_message("End date must be after start date.", "error")
+                    return jsonify({"error": "End date must be after start date"}), 400
+        # if start is provided, compare with existing end
+        elif start_date and not end_date:
+            if contract.date_end:
+                contract_end = contract.date_end
+                if isinstance(contract_end, datetime.date) and not isinstance(contract_end, datetime.datetime):
+                    contract_end = datetime.datetime.combine(contract_end, datetime.time.min)
+                if contract_end < start_date:
+                    flash_message("End date must be after start date.", "error")
+                    return jsonify({"error": "End date must be after start date"}), 400
 
-        if not file or not allowed_file(file.filename):
-            flash_message("Invalid file.", "error")
-            return safe_redirect("views.index")
-
-        if not user_has_permission(contract_id, current_user.id):
-            flash_message("Access denied.", "error")
-            return safe_redirect("views.index")
-
-
-        if Invoice.query.filter_by(contract_id=contract_id).first():
-            flash_message("Invoice already exists.", "error")
-            return safe_redirect("views.index")
+        # update fields after validation
+        if job:
+            contract.job_title = job
+        if start_date:
+            contract.date_start = start_date
+        if end_date:
+            contract.date_end = end_date
             
+        if pay != "":
+            try:
+                contract.pay_rate = int(pay)
+            except ValueError:
+                flash_message("Invalid pay rate.", "error")
+                return jsonify({"error": "Invalid pay rate"}), 400
 
         try:
-            filename = secure_filename(file.filename)
-            invoice = Invoice(filename=filename, invoice_data=file.read(), contract_id=contract_id)
-            db.session.add(invoice)
             db.session.commit()
-            flash_message("File uploaded successfully.", "success")
+            flash_message("Notch has been updated.", "success")
+            return jsonify({}), 200
         except Exception as e:
             db.session.rollback()
-            flash_message("An error occurred during upload.", "error")
+            flash_message("Database error: could not update contract.", "error")
+            return jsonify({"error": "Database error"}), 500
 
-        return safe_redirect("views.index")
-    
-
-    return render_template("upload.html", user=current_user)
+    except Exception as e:
+        flash_message("An unexpected error occurred.", "error")
+        return jsonify({"error": "Unexpected error"}), 500
 
 @views.route("/download/<int:id>", methods=["GET"])
 @login_required
